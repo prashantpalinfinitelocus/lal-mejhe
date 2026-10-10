@@ -15,7 +15,7 @@ try {
  require_once __DIR__.'/config.php';
  header('Content-Type: application/json; charset=utf-8'); header('Cache-Control: no-store, no-cache, must-revalidate, max-age=0');
  if($_SERVER['REQUEST_METHOD']!=='POST') signup_error('Invalid request.',405);
- $csrf=(string)($_POST['csrf_token']??''); if(!hash_equals((string)($_SESSION['csrf_token']??''),$csrf)) signup_error('Security validation failed. Please refresh the page.',403);
+ $csrf=(string)($_POST['csrf_token']??''); if(!csrf_valid($csrf)) signup_error('Security validation failed. Please refresh the page.',403);
  if(empty($_SESSION['mobile_verified'])||empty($_SESSION['verified_mobile'])) signup_error('Please verify your mobile number first.',401);
  if((string)($_POST['terms_privacy']??'')!=='1') signup_error('Please accept the Terms & Conditions and Privacy Policy to continue.',422);
  $mobile=function_exists('sms_normalize_mobile')?sms_normalize_mobile($_SESSION['verified_mobile']):preg_replace('/\D+/','',(string)$_SESSION['verified_mobile']);

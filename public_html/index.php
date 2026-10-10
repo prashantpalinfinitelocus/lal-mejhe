@@ -94,7 +94,7 @@ $bookingAccessCode = $_SESSION['last_booking_code'] ?? '';
               <div class="section4-map"><iframe id="locationMap" src="<?=hs($first['map']??'https://www.google.com/maps?q=Kolkata,West%20Bengal&z=12&output=embed')?>" loading="eager" title="Selected location map"></iframe></div>
             </div>
             <div class="booking-card-head"><h2>Book Your Lal Mejhe</h2><p>Select a date first, then choose 1-hour time slot.</p></div>
-            <form method="post" action="book.php" id="bookingForm"><input type="hidden" name="csrf_token" value="<?=hs($_SESSION['csrf_token']??'')?>">
+            <form method="post" action="book.php" id="bookingForm"><input type="hidden" name="csrf_token" value="<?=hs(csrf_token())?>">
               <input type="hidden" name="location_id" id="location_id" value="<?=hs($first['id']??0)?>">
               <input type="hidden" name="guest_name" id="guest_name"><input type="hidden" name="guest_mobile" id="guest_mobile"><input type="hidden" name="slot_date" id="slotDateInput"><input type="hidden" name="seats" id="seatsInput">
               <div class="book-step wide"><div class="step-no">01</div><div class="step-content"><h3>Select Date</h3><div id="dateButtons" class="date-buttons"></div></div></div>

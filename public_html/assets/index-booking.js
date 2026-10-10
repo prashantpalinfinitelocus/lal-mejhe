@@ -470,14 +470,16 @@ async function submitSignup(){
 
 // Artwork fallback: if a newly supplied artwork was not uploaded, use the existing artwork file.
 (function(){
+  const ARTWORK_FALLBACKS=['/assets/section2-mobile.jpg','/assets/section2.webp','/assets/section3-mobile.jpg','/assets/section3.webp','/assets/section5.webp'];
   document.querySelectorAll('.artwork-page-v94 picture').forEach(function(picture){
     const source=picture.querySelector('source[data-fallback]');
     const img=picture.querySelector('img[data-fallback]');
     if(img){
       img.addEventListener('error',function(){
-        const fallback=img.getAttribute('data-fallback');
+        // Only the known artwork files can be used as a fallback; the value is never taken from the page as-is.
+        const fallback=ARTWORK_FALLBACKS[ARTWORK_FALLBACKS.indexOf(img.getAttribute('data-fallback'))];
         if(fallback && img.getAttribute('src')!==fallback){
-          if(source) source.setAttribute('srcset',source.getAttribute('data-fallback')||'');
+          if(source) source.setAttribute('srcset',ARTWORK_FALLBACKS[ARTWORK_FALLBACKS.indexOf(source.getAttribute('data-fallback'))]||'');
           img.src=fallback;
         }
       },{once:true});

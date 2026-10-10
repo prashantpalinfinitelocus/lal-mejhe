@@ -16,25 +16,20 @@ if ($code !== '') {
     <h1>Your Booking is Confirmed!</h1>
     <p>Your unique booking code</p>
     <h2><?php echo htmlspecialchars($code); ?></h2>
-    <p class="booking-reference-reminder" style="display:block!important;visibility:visible!important;opacity:1!important;color:#111!important;font-size:16px!important;font-weight:700!important;line-height:1.5!important;margin:12px 0 18px!important;">Please save this code for your booking reference.</p>
+    <p class="booking-reference-reminder lm-success-1">Please save this code for your booking reference.</p>
 
 
-    <a class="btn" href="index.php" style="display:block!important;width:100%!important;box-sizing:border-box!important;text-align:center!important;">BACK TO HOME →</a>
+    <a class="btn lm-success-2" href="index.php">BACK TO HOME →</a>
   </div>
 </section>
 <?php if ($booking): ?>
-<script>
-localStorage.setItem('bookingConfirmed', <?=json_encode($booking['booking_code'])?>);
-// One-time permission to show the confirmation on Page 5 after returning home.
-// Unlike localStorage, this session marker is cleared when the visitor leaves Page 5.
-sessionStorage.setItem('pendingBookingConfirmation', <?=json_encode($booking['booking_code'])?>);
-localStorage.setItem('lastBookingDetails', <?=json_encode([
+<script type="application/json" id="lm-booking"><?=json_encode(['code'=>$booking['booking_code'],'details'=>[
   'name'=>$booking['name'],
   'location'=>$booking['location_name'],
   'date'=>date('d M Y', strtotime($booking['slot_date'])),
   'time'=>$booking['slot_time'],
   'seats'=>'Seats: '.$booking['seats']
-], JSON_UNESCAPED_SLASHES|JSON_UNESCAPED_UNICODE)?>);
-</script>
+]],JSON_UNESCAPED_SLASHES|JSON_UNESCAPED_UNICODE|JSON_HEX_TAG|JSON_HEX_AMP|JSON_HEX_APOS|JSON_HEX_QUOT)?></script>
+<script src="/assets/success-store.js?v=1" defer></script>
 <?php endif; ?>
 <?php include 'footer.php'; ?>

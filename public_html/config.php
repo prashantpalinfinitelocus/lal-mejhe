@@ -2,14 +2,14 @@
 /* Secrets are NOT stored in this file. Set DB_HOST, DB_NAME, DB_USER, DB_PASS, INFOBIP_API_KEY and APP_OTP_SECRET
  * as server environment variables (see config.sample.php and README.md). */
 
-$host = getenv('DB_HOST') ?: 'localhost';
+$dbHost = getenv('DB_HOST') ?: 'localhost';
 $db = getenv('DB_NAME') ?: '';
 $user = getenv('DB_USER') ?: '';
 $pass = getenv('DB_PASS') ?: '';
 
 try {
     $pdo = new PDO(
-        "mysql:host=$host;dbname=$db;charset=utf8mb4",
+        "mysql:host=$dbHost;dbname=$db;charset=utf8mb4",
         $user,
         $pass,
         [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION, PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC]
@@ -47,7 +47,7 @@ if (!headers_sent()) {
     if (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off') {
         header('Strict-Transport-Security: max-age=31536000');
     }
-    header("Content-Security-Policy: default-src 'self'; base-uri 'self'; object-src 'none'; frame-ancestors 'self'; form-action 'self'; img-src 'self' data: blob: https:; font-src 'self' data: https:; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline'; connect-src 'self' https:; frame-src 'self' https://www.google.com https://www.google.co.in https://maps.google.com;");
+    header("Content-Security-Policy: default-src 'self'; base-uri 'self'; object-src 'none'; frame-ancestors 'self'; form-action 'self'; img-src 'self' data: blob: https:; font-src 'self' data: https:; style-src 'self'; script-src 'self'; connect-src 'self' https:; frame-src 'self' https://www.google.com https://www.google.co.in https://maps.google.com;");
 }
 
 /* V102.6.4: Simple secure admin password store.
@@ -115,9 +115,21 @@ function otp_schema_status(PDO $pdo): array {
         return ['ok'=>false,'missing_table'=>false,'missing_columns'=>OTP_REQUIRED_COLUMNS,'error'=>$e->getMessage()];
     }
 }
-?>
 
 
+header_remove('X-Powered-By');
 
-
-
+/* CSRF protection with a fresh token on every page. Each token is a random nonce plus an HMAC of it keyed with a
+ * secret kept in the session, so tokens differ per request but all stay valid for the session (other tabs keep working). */
+function csrf_key(): string {
+    if (empty($_SESSION['csrf_key']) || !is_string($_SESSION['csrf_key'])) $_SESSION['csrf_key'] = bin2hex(random_bytes(32));
+    return $_SESSION['csrf_key'];
+}
+function csrf_token(): string {
+    $nonce = bin2hex(random_bytes(16));
+    return $nonce . '.' . hash_hmac('sha256', $nonce, csrf_key());
+}
+function csrf_valid(string $token): bool {
+    if (!preg_match('/^([a-f0-9]{32})\.([a-f0-9]{64})$/', $token, $m) || empty($_SESSION['csrf_key'])) return false;
+    return hash_equals(hash_hmac('sha256', $m[1], (string)$_SESSION['csrf_key']), $m[2]);
+}

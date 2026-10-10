@@ -71,16 +71,7 @@ if (is_file($logPath)) {
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>SMS Gateway Diagnostic</title>
-<style>
-body{font-family:Arial,sans-serif;background:#f6f6f6;margin:0;color:#111}
-.wrap{max-width:1000px;margin:40px auto;padding:0 20px}
-.card{background:#fff;border-radius:16px;padding:26px;margin-bottom:20px;box-shadow:0 8px 30px #0001}
-h1{margin-top:0}.ok{background:#e9f8ef;padding:14px;border-radius:10px}.bad{background:#fff0f0;padding:14px;border-radius:10px}
-input,button{font:inherit;padding:12px;border-radius:9px;border:1px solid #ccc}
-input{width:260px}button{background:#e41e2b;color:#fff;border:0;cursor:pointer;font-weight:700}
-pre{white-space:pre-wrap;word-break:break-word;background:#111;color:#eee;padding:15px;border-radius:10px;font-size:12px}
-small{color:#666}
-</style>
+<link rel="stylesheet" href="../assets/admin-sms-test.css?v=1">
 </head>
 <body>
 <div class="wrap">
@@ -96,27 +87,27 @@ small{color:#666}
 <?php endif; ?>
 
 <?php if ($result && !empty($result['message_id'])): ?>
-<div style="margin-top:16px;padding:14px;border:1px solid #ddd;border-radius:10px;background:#fafafa">
+<div class="lm-sms-test-1">
 <strong>Infobip Message ID:</strong> <code><?=e($result['message_id'])?></code>
 <?php if (!empty($result['initial_status'])): ?><br><strong>Initial status:</strong> <?=e($result['initial_status'])?><?php endif; ?>
 <?php if (!empty($result['initial_status_description'])): ?><br><strong>Description:</strong> <?=e($result['initial_status_description'])?><?php endif; ?>
-<form method="post" style="margin-top:12px">
+<form class="lm-sms-test-2" method="post">
 <input type="hidden" name="csrf_token" value="<?=e($csrf)?>">
 <input type="hidden" name="action" value="check_delivery">
 <input type="hidden" name="message_id" value="<?=e($result['message_id'])?>">
-<button type="submit" style="background:#111">CHECK DELIVERY STATUS</button>
+<button class="lm-sms-test-3" type="submit">CHECK DELIVERY STATUS</button>
 </form>
 </div>
 <?php endif; ?>
 
 <?php if ($result && isset($result['provider']) && is_array($result['provider']) && !empty($result['provider'])): ?>
-<div style="margin-top:16px">
+<div class="lm-sms-test-4">
 <strong>Sanitized provider response:</strong>
 <pre><?=e(json_encode($result['provider'], JSON_PRETTY_PRINT|JSON_UNESCAPED_SLASHES))?></pre>
 </div>
 <?php endif; ?>
 
-<form method="post" style="margin-top:20px">
+<form class="lm-sms-test-5" method="post">
 <input type="hidden" name="csrf_token" value="<?=e($csrf)?>">
 <label>Indian mobile number</label><br><br>
 <input name="mobile" inputmode="numeric" maxlength="10" placeholder="9876543210" value="<?=e(substr($mobile,2))?>">
@@ -146,5 +137,5 @@ small{color:#666}
 <?php endforeach; endif; ?>
 </div>
 </div>
-<div style="position:fixed;right:20px;top:20px;z-index:99"><form method="post" action="logout.php"><input type="hidden" name="csrf_token" value="<?=e($_SESSION['admin_csrf_token']??'')?>"><button style="background:#e41e2b;color:#fff;border:0;border-radius:9px;padding:9px 13px;font-weight:800;cursor:pointer">Logout</button></form></div></body>
+<div class="lm-sms-test-6"><form method="post" action="logout.php"><input type="hidden" name="csrf_token" value="<?=e($_SESSION['admin_csrf_token']??'')?>"><button class="lm-sms-test-7">Logout</button></form></div></body>
 </html>

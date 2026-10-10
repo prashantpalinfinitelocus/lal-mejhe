@@ -3,7 +3,7 @@ require 'config.php';
 
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') die('Invalid request');
 $csrf=(string)($_POST['csrf_token']??'');
-if (!hash_equals((string)($_SESSION['csrf_token']??''), $csrf)) { http_response_code(403); die('Security validation failed. Please refresh the page.'); }
+if (!csrf_valid($csrf)) { http_response_code(403); die('Security validation failed. Please refresh the page.'); }
 
 $name = trim((string)($_SESSION['user_name'] ?? ''));
 // V120 consent-only signup does not collect a name for first-time visitors.

@@ -1,16 +1,5 @@
 <?php include 'header.php'; ?>
-<style>
-/* Terms document: allow normal page scrolling; do not use fixed-height or overflow locking. */
-html, body { height:auto !important; min-height:100% !important; overflow-y:auto !important; overflow-x:hidden !important; }
-body { position:static !important; }
-.legal-page-v94.terms-pdf-page { display:block !important; position:relative !important; height:auto !important; min-height:calc(100vh - 120px) !important; max-height:none !important; overflow:visible !important; }
-.terms-pdf-page .legal-inner-v94 { max-width:1000px; margin:0 auto; }
-.terms-pdf-page h2 { margin-top:22px; }
-.terms-pdf-page p, .terms-pdf-page li { overflow-wrap:anywhere; }
-.terms-pdf-page .terms-sublist { margin:0 0 14px 22px; padding-left:18px; line-height:1.65; }
-.terms-pdf-page .terms-sublist li { margin:4px 0; }
-.terms-pdf-page .terms-disclaimer { margin-top:34px; padding-top:18px; border-top:1px solid #ddd; }
-</style>
+<link rel="stylesheet" href="/assets/terms-page.css?v=1">
 <main class="legal-page-v94 terms-pdf-page">
   <div class="legal-inner-v94">
     <h1>Terms and Conditions</h1>

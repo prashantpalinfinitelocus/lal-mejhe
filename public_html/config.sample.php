@@ -4,14 +4,14 @@
   EASIEST METHOD: Open https://yourdomain.com/setup.php and enter your exact
   Hostinger MySQL database name, username and password.
 */
-$host = 'localhost';
+$dbHost = 'localhost';
 $db = 'YOUR_HOSTINGER_DATABASE_NAME';
 $user = 'YOUR_HOSTINGER_DATABASE_USERNAME';
 $pass = 'YOUR_HOSTINGER_DATABASE_PASSWORD';
 
 try {
     $pdo = new PDO(
-        "mysql:host=$host;dbname=$db;charset=utf8mb4",
+        "mysql:host=$dbHost;dbname=$db;charset=utf8mb4",
         $user,
         $pass,
         [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION, PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC]

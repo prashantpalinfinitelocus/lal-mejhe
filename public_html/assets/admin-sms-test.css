@@ -1,0 +1,17 @@
+body{font-family:Arial,sans-serif;background:#f6f6f6;margin:0;color:#111}
+.wrap{max-width:1000px;margin:40px auto;padding:0 20px}
+.card{background:#fff;border-radius:16px;padding:26px;margin-bottom:20px;box-shadow:0 8px 30px #0001}
+h1{margin-top:0}.ok{background:#e9f8ef;padding:14px;border-radius:10px}.bad{background:#fff0f0;padding:14px;border-radius:10px}
+input,button{font:inherit;padding:12px;border-radius:9px;border:1px solid #ccc}
+input{width:260px}button{background:#e41e2b;color:#fff;border:0;cursor:pointer;font-weight:700}
+pre{white-space:pre-wrap;word-break:break-word;background:#111;color:#eee;padding:15px;border-radius:10px;font-size:12px}
+small{color:#666}
+
+/* inline styles moved out of the page (CSP) */
+.lm-sms-test-1{margin-top:16px !important;padding:14px !important;border:1px solid #ddd !important;border-radius:10px !important;background:#fafafa !important}
+.lm-sms-test-2{margin-top:12px !important}
+.lm-sms-test-3{background:#111 !important}
+.lm-sms-test-4{margin-top:16px !important}
+.lm-sms-test-5{margin-top:20px !important}
+.lm-sms-test-6{position:fixed !important;right:20px !important;top:20px !important;z-index:99 !important}
+.lm-sms-test-7{background:#e41e2b !important;color:#fff !important;border:0 !important;border-radius:9px !important;padding:9px 13px !important;font-weight:800 !important;cursor:pointer !important}

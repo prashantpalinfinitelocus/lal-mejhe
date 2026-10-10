@@ -7,4 +7,5 @@ if(empty($_SESSION['sms_test_csrf'])||!hash_equals($_SESSION['sms_test_csrf'],(s
 $messageId=trim((string)($_POST['message_id']??''));
 if($messageId===''||strlen($messageId)>120||!preg_match('/^[A-Za-z0-9._:-]+$/',$messageId)){http_response_code(422);echo json_encode(['ok'=>false]);exit;}
 $r=infobip_get_delivery_report($messageId);
+// nosemgrep: php.lang.security.injection.echoed-request.echoed-request (JSON response, Content-Type is application/json, values are json_encode'd)
 echo json_encode(['ok'=>$r['ok'],'http_status'=>$r['status']??0,'message_id'=>$messageId,'provider'=>$r['provider']??[],'diagnostic'=>$r['diagnostic']??null]);

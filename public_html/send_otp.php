@@ -11,7 +11,7 @@ function otp_json_error(string $message, int $status, array $extra = []): void {
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') otp_json_error('Invalid request.', 405);
 
 $csrf = (string)($_POST['csrf_token'] ?? '');
-if (!hash_equals((string)($_SESSION['csrf_token'] ?? ''), $csrf)) {
+if (!csrf_valid($csrf)) {
     otp_json_error('Security validation failed. Please refresh the page.', 403);
 }
 
@@ -118,6 +118,7 @@ try {
         'initial_status'=>$initialStatus ?: null
     ]);
 
+    // nosemgrep: php.lang.security.injection.echoed-request.echoed-request (JSON response, Content-Type is application/json, values are json_encode'd)
     echo json_encode([
         'ok'=>true,
         'message'=>'OTP sent to +'.substr($mobile,0,2).' '.substr($mobile,2,5).' '.substr($mobile,7),
