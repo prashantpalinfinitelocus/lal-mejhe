@@ -1,0 +1,1556 @@
+/* V94 — independent artwork pages. No auto-slide. Each page owns its header/artwork/nav/footer. */
+:root{--v94-red:#e41e2b;--v94-white:#fff;--v94-black:#111;--v94-header:76px;--v94-nav:52px}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0;background:#fff;color:#111;overflow-x:hidden}
+body{min-height:100vh}
+.site-header-v94{height:var(--v94-header);min-height:var(--v94-header);background:#fff;display:flex;align-items:center;justify-content:center;position:relative;z-index:1000;border-bottom:1px solid rgba(0,0,0,.08)}
+.site-header-v94 .brandLogo{display:flex;align-items:center;justify-content:center;width:190px;height:60px;text-decoration:none}
+.site-header-v94 .brandLogo img{display:block;width:auto;height:52px;max-width:170px;object-fit:contain}
+.lal-page-v94{position:relative;width:100%}
+.experience-page-v94{display:none;position:relative;width:100%;min-height:calc(100vh - var(--v94-header));background:#fff;overflow-x:hidden;overflow-y:auto;padding-bottom:0;scroll-behavior:smooth}
+.experience-page-v94.is-active{display:block}
+.artwork-page-v94{width:100%;line-height:0;background:#fff;display:flex;justify-content:center;align-items:flex-start;overflow:hidden}
+.artwork-page-v94 picture,.artwork-page-v94 img{display:block;width:100%;height:auto}
+.artwork-page-v94 img{max-width:100%;object-fit:contain}
+.artwork-s2-v94 img,.artwork-s3-v94 img,.artwork-s5-v94 img{width:100%;height:auto}
+.page-content-v94{width:100%;background:#fff}
+.floating-nav-v94{position:fixed;left:0;right:0;bottom:26px;z-index:5000;display:flex;justify-content:space-between;align-items:center;padding:0 24px;pointer-events:none}
+.page-nav-v94{pointer-events:auto;border:0;background:var(--v94-red);color:#fff;font:800 14px/1 TCCC,Arial,sans-serif;letter-spacing:.06em;padding:14px 20px;min-width:110px;border-radius:999px;box-shadow:0 6px 20px rgba(0,0,0,.22);cursor:pointer}
+.page-nav-v94:hover{transform:translateY(-1px)}
+.page-nav-v94:disabled{visibility:hidden;pointer-events:none}
+.page-footer-v94{width:100%;background:#fff;color:#111;border-top:1px solid #e41e2b;min-height:120px;display:flex;align-items:center;justify-content:center;text-align:center;padding:26px 20px 34px;position:relative;z-index:20}
+.footer-inner-v94{display:flex;flex-direction:column;align-items:center;gap:7px;max-width:1000px}
+.footer-brand-v94{font-size:17px;font-weight:900;color:var(--v94-red);letter-spacing:.03em}
+.footer-copy-v94{font-size:11px;line-height:1.4;color:#222}
+.footer-links-v94{display:flex;justify-content:center;gap:24px;flex-wrap:wrap;margin:4px 0}
+.footer-links-v94 a{color:var(--v94-red);font-size:11px;font-weight:700;text-decoration:none}
+.footer-links-v94 a:hover{text-decoration:underline}
+/* Booking page: let the existing V82 artwork/functionality breathe naturally instead of fixed 667px clipping. */
+.page-booking-v94 .design-s4{height:auto!important;min-height:0!important;padding:32px 0 42px!important;overflow:visible!important;background:#fff!important}
+.page-booking-v94 .section4-shell{height:auto!important;min-height:0!important;max-width:1185px!important;width:calc(100% - 32px)!important;margin:0 auto!important;align-items:start!important}
+.page-booking-v94 .section4-hotspot{height:328px!important;margin:120px 0 0!important}
+.page-booking-v94 .section4-booking-card{height:auto!important;min-height:667px!important;max-height:none!important;overflow:visible!important}
+.page-booking-v94 .section4-location-head{height:auto!important;min-height:219px!important}
+.page-booking-v94 .section4-booking-card form{height:auto!important;overflow:visible!important}
+.page-booking-v94 .section4-booking-card .book-step{height:auto!important;min-height:0!important}
+.page-booking-v94 .section4-booking-card .mini-seat-grid{height:auto!important;min-height:95px!important;max-height:none!important;overflow:visible!important}
+.page-booking-v94 .section4-booking-card .date-buttons{overflow:visible!important;flex-wrap:wrap!important}
+.page-booking-v94 .section4-booking-card .slot-pills{max-height:none!important;overflow:visible!important}
+@media(max-width:1000px){
+  :root{--v94-header:68px}
+  .site-header-v94 .brandLogo{height:54px}.site-header-v94 .brandLogo img{height:45px;max-width:150px}
+  .experience-page-v94{min-height:calc(100vh - var(--v94-header))}
+  .floating-nav-v94{bottom:18px;padding:0 14px}
+  .page-nav-v94{font-size:12px;min-width:94px;padding:12px 15px}
+  .page-booking-v94 .design-s4{padding:20px 0 55px!important}
+  .page-booking-v94 .section4-shell{width:calc(100% - 24px)!important;grid-template-columns:1fr!important;gap:18px!important}
+  .page-booking-v94 .section4-hotspot{width:100%!important;height:360px!important;margin:0!important}
+  .page-booking-v94 .section4-booking-card{width:100%!important;min-height:0!important}
+}
+@media(max-width:767px){
+  :root{--v94-header:62px}
+  .site-header-v94{height:var(--v94-header);min-height:var(--v94-header)}
+  .site-header-v94 .brandLogo{width:150px;height:52px}.site-header-v94 .brandLogo img{height:42px;max-width:135px}
+  .artwork-page-v94 img{width:100%;height:auto;max-width:none}
+  .floating-nav-v94{bottom:12px;padding:0 10px}
+  .page-nav-v94{font-size:10px;min-width:78px;padding:10px 12px}
+  .page-footer-v94{min-height:132px;padding:22px 14px 42px}
+  .footer-brand-v94{font-size:15px}.footer-copy-v94{font-size:9px}.footer-links-v94{gap:15px}.footer-links-v94 a{font-size:9px}
+  .page-booking-v94 .design-s4{padding:14px 0 48px!important}
+  .page-booking-v94 .section4-shell{width:100%!important;padding:0 10px!important;display:flex!important;flex-direction:column!important}
+  .page-booking-v94 .section4-hotspot{height:auto!important;min-height:0!important;aspect-ratio:1152/2048!important;margin:0!important;overflow:hidden!important}
+  .page-booking-v94 .section4-hotspot .kolkata-map-art{position:absolute!important;inset:0!important;width:100%!important;height:100%!important;right:auto!important;top:auto!important}
+  .page-booking-v94 .section4-hotspot .kolkata-map-art img{width:100%!important;height:100%!important;object-fit:contain!important}
+  .page-booking-v94 .hotspot-copy{z-index:8}
+  .page-booking-v94 .hotspot-footer{z-index:9}
+  .page-booking-v94 .section4-booking-card{padding:14px 12px 20px!important;width:100%!important}
+  .page-booking-v94 .section4-location-head{display:grid!important;grid-template-columns:1fr!important;grid-template-rows:auto auto!important;min-height:0!important;height:auto!important}
+  .page-booking-v94 .section4-map{grid-column:1!important;grid-row:auto!important;width:100%!important;height:210px!important}
+  .page-booking-v94 .section4-direction{grid-column:1!important;grid-row:auto!important}
+  .page-booking-v94 .section4-booking-card .date-buttons{display:grid!important;grid-template-columns:repeat(3,minmax(0,1fr))!important;overflow:visible!important}
+  .page-booking-v94 .section4-booking-card .date-btn{width:100%!important;min-width:0!important}
+  .page-booking-v94 .section4-booking-card .mini-seat-grid{grid-template-columns:repeat(5,minmax(0,1fr))!important;grid-template-rows:none!important;grid-auto-rows:25px!important;height:auto!important;min-height:0!important}
+}
+@media(min-width:768px){
+  .artwork-page-v94{min-height:calc(100vh - var(--v94-header))}
+  .artwork-page-v94 img{min-height:calc(100vh - var(--v94-header));object-fit:contain;object-position:center top}
+}
+
+.legal-page-v94{min-height:calc(100vh - var(--v94-header));background:#fff;padding:56px 20px}.legal-inner-v94{max-width:900px;margin:0 auto}.legal-inner-v94 h1{font-size:42px;line-height:1;color:#e41e2b;margin:0 0 18px}.legal-inner-v94 h2{font-size:21px;color:#e41e2b;margin:28px 0 8px}.legal-inner-v94 p{font-size:15px;line-height:1.65;margin:0 0 12px;color:#222}.legal-inner-v94 a{color:#e41e2b}@media(max-width:767px){.legal-page-v94{padding:34px 16px}.legal-inner-v94 h1{font-size:30px}.legal-inner-v94 h2{font-size:18px}.legal-inner-v94 p{font-size:13px;line-height:1.55}}
+
+.page-index-v94>.global-header-v94{display:none}.page-header-v94{display:flex!important}
+.experience-page-v94 .page-header-v94{position:relative;z-index:1000}
+
+/* V95 — Page 4 booking gate + confirmation popup */
+.gated-page-v94.page-locked-v95 { pointer-events:none; }
+.gated-page-v94.page-locked-v95 .artwork-page-v94,
+.gated-page-v94.page-locked-v95 .floating-nav-v94,
+.gated-page-v94.page-locked-v95 footer,
+.gated-page-v94.page-locked-v95 .page-footer-v94 { visibility:hidden !important; }
+.booking-confirm-modal-v95 { position:fixed; inset:0; z-index:99999; display:none; align-items:center; justify-content:center; padding:24px; }
+.booking-confirm-modal-v95.is-open { display:flex; }
+.booking-confirm-overlay { position:absolute; inset:0; background:rgba(0,0,0,.62); backdrop-filter:blur(4px); }
+.booking-confirm-card { position:relative; z-index:2; width:min(520px,94vw); max-height:88vh; overflow:auto; background:#fff; border-radius:18px; padding:34px 30px 28px; box-shadow:0 24px 80px rgba(0,0,0,.3); color:#111; text-align:center; }
+.booking-confirm-close { position:absolute; top:10px; right:14px; width:38px; height:38px; border:0; border-radius:50%; background:#f2f2f2; color:#111; font-size:27px; line-height:1; cursor:pointer; }
+.booking-confirm-eyebrow { display:block; font-size:12px; letter-spacing:2px; font-weight:800; color:#e41e2b; margin-bottom:8px; }
+.booking-confirm-card h2 { margin:0 0 14px; color:#e41e2b; font-family:TCCCCondensed,TCCCHeadline,Arial,sans-serif; font-size:32px; line-height:1; }
+.booking-confirm-code { display:inline-block; margin:6px 0 18px; padding:9px 16px; border:2px solid #e41e2b; border-radius:8px; color:#e41e2b; font-weight:800; letter-spacing:1px; }
+.booking-confirm-details { text-align:left; border-top:1px solid #eee; border-bottom:1px solid #eee; padding:12px 4px; line-height:1.65; }
+.booking-confirm-details div { padding:3px 0; }
+.booking-confirm-ok { margin-top:20px; border:0; background:#e41e2b; color:#fff; padding:13px 20px; border-radius:7px; font-weight:800; cursor:pointer; }
+@media (max-width:767px){ .booking-confirm-modal-v95{padding:14px}.booking-confirm-card{width:100%;padding:30px 20px 22px;max-height:90svh}.booking-confirm-card h2{font-size:27px}.booking-confirm-code{font-size:14px} }
+
+/* V96 - supplied Section 3 artwork: desktop 2048x1152, mobile 1151x2048 */
+@media (min-width:768px){.artwork-s3-v94 picture,.artwork-s3-v94 img{width:100%;height:auto;display:block}.artwork-s3-v94 img{object-fit:contain;object-position:center top}}
+@media (max-width:767px){.artwork-s3-v94 picture,.artwork-s3-v94 img{width:100%;height:auto;display:block}.artwork-s3-v94 img{object-fit:contain;object-position:center top}}
+
+/* V97 hotfix: restore the actual page-rebuild stylesheet after V96 asset update. */
+html,body{width:100%;max-width:100%;overflow-x:hidden!important;}
+.experience-page-v94{box-sizing:border-box;}
+.artwork-page-v94 picture{width:100%;max-width:100%;display:block;}
+.artwork-page-v94 img{display:block;max-width:100%;}
+@media(max-width:767px){.artwork-page-v94,.artwork-page-v94 picture{width:100%;}.artwork-page-v94 img{width:100%;height:auto;object-fit:contain;}}
+/* V100 SMS OTP authentication */
+.sms-auth-box{max-width:520px!important}
+.sms-eyebrow{display:inline-block;font-size:11px;font-weight:900;letter-spacing:2px;color:#e41e2b;margin-bottom:10px}
+.sms-auth-box h2{margin-bottom:8px}
+.sms-auth-box p{margin:0 0 18px}
+.mobile-input-wrap{display:flex;align-items:center;border:1px solid #ddd;border-radius:12px;overflow:hidden;background:#fff;margin:10px 0}
+.mobile-input-wrap>span{padding:15px 12px;font-weight:800;border-right:1px solid #eee;background:#fafafa}
+.mobile-input-wrap input{border:0!important;margin:0!important;border-radius:0!important;outline:0;width:100%!important}
+.sms-auth-box .otp-input{text-align:center;font-size:24px;letter-spacing:8px;font-weight:800}
+.sms-auth-box .otp-secondary{background:#fff!important;color:#e41e2b!important;border:1px solid #e41e2b!important}
+.sms-auth-box button:disabled{opacity:.55;cursor:not-allowed}
+
+/* V102.4 — OTP first, then compact signup form. No terms acceptance gate. */
+.signup-auth-box{max-width:440px!important;text-align:center!important}
+.signup-auth-box .signup-mark{width:44px;height:44px;margin:2px auto 14px;border-radius:50%;display:grid;place-items:center;background:#e41e2b;color:#fff;font-size:24px;font-weight:900}
+.signup-auth-box input:not(.otp-input){box-sizing:border-box;width:100%!important;margin:7px 0!important;padding:14px 15px!important;border:1px solid #e8e8e8!important;border-radius:14px!important;background:#f7f7f7!important;outline:0!important}
+.signup-auth-box input:not(.otp-input):focus{border-color:#e41e2b!important;background:#fff!important}
+.signup-auth-box .compact-mobile{margin:7px 0!important;background:#f7f7f7!important;border-color:#e8e8e8!important}
+.signup-auth-box .compact-mobile input{background:transparent!important}
+.signup-auth-box .otp-input{box-sizing:border-box;width:100%!important;margin:7px 0!important;padding:14px!important;border:1px solid #e8e8e8!important;border-radius:14px!important;background:#f7f7f7!important}
+.signup-auth-box #verifyOtpBtn{width:100%!important;border-radius:14px!important;margin-top:7px!important}
+.signup-auth-box .otp-secondary{width:100%!important;border-radius:14px!important;margin-top:8px!important}
+@media(max-width:767px){.signup-auth-box{width:min(92vw,440px)!important;padding:26px 20px!important}.signup-auth-box h2{font-size:30px!important}}
+
+/* V102.5 AUTH FLOW: mobile -> OTP verify -> signup */
+.signup-auth-box .otp-link-btn{width:100%!important;background:transparent!important;color:#e41e2b!important;border:0!important;margin-top:8px!important;font-size:12px!important;font-weight:800!important;letter-spacing:.04em!important}
+.signup-auth-box .consent-check{display:flex!important;flex-direction:row!important;align-items:flex-start!important;justify-content:flex-start!important;gap:8px!important;width:100%!important;text-align:left!important;margin:10px 2px 12px!important;font-size:12px!important;line-height:1.45!important;color:#555!important}
+.signup-auth-box .consent-check input{display:block!important;flex:0 0 15px!important;width:15px!important;height:15px!important;min-width:15px!important;max-width:15px!important;margin:2px 0 0!important;padding:0!important;accent-color:#e41e2b!important}
+.signup-auth-box .consent-check label{display:block!important;flex:1 1 auto!important;width:auto!important;margin:0!important;padding:0!important;text-align:left!important;font-size:12px!important;line-height:1.45!important;color:#555!important;font-weight:400!important}
+.signup-auth-box .consent-check a{color:#e41e2b!important;text-decoration:underline!important;font-weight:700!important}
+.signup-auth-box #signupSubmitBtn{width:100%!important;border-radius:14px!important;margin-top:5px!important}
+
+
+/* =========================================================
+   V104 — SLICK MOBILE FOOTER + FULL PORTRAIT ARTWORK
+   Keeps Section 4 booking layout natural.
+   ========================================================= */
+
+@media (max-width:767px){
+
+  /* Compact footer always visible on mobile */
+  .experience-page-v94 .page-footer-v94{
+    position:fixed!important;
+    left:0!important;
+    right:0!important;
+    bottom:0!important;
+    width:100%!important;
+    height:46px!important;
+    min-height:46px!important;
+    max-height:46px!important;
+    padding:0 10px!important;
+    margin:0!important;
+    background:rgba(255,255,255,.97)!important;
+    border-top:2px solid #e41e2b!important;
+    box-shadow:0 -4px 16px rgba(0,0,0,.10)!important;
+    z-index:7000!important;
+    display:flex!important;
+    align-items:center!important;
+    justify-content:center!important;
+    backdrop-filter:blur(6px);
+  }
+
+  .experience-page-v94 .footer-inner-v94{
+    width:100%!important;
+    max-width:none!important;
+    display:flex!important;
+    flex-direction:row!important;
+    align-items:center!important;
+    justify-content:center!important;
+    gap:10px!important;
+    white-space:nowrap!important;
+  }
+
+  .experience-page-v94 .footer-links-v94{
+    display:flex!important;
+    align-items:center!important;
+    justify-content:center!important;
+    flex-wrap:nowrap!important;
+    gap:12px!important;
+    margin:0!important;
+  }
+
+  .experience-page-v94 .footer-links-v94 a{
+    display:inline-flex!important;
+    align-items:center!important;
+    color:#e41e2b!important;
+    font-size:10px!important;
+    line-height:1!important;
+    font-weight:800!important;
+    text-decoration:none!important;
+    white-space:nowrap!important;
+  }
+
+  .experience-page-v94 .footer-links-v94 a + a::before{
+    content:"•";
+    color:#111;
+    margin-right:12px;
+    font-weight:700;
+  }
+
+  .experience-page-v94 .footer-copy-v94{
+    display:none!important;
+  }
+
+  /* Navigation sits just above the footer */
+  .experience-page-v94 .floating-nav-v94{
+    bottom:58px!important;
+    z-index:7100!important;
+    padding-left:10px!important;
+    padding-right:10px!important;
+  }
+
+  /* Reserve the footer area for scrollable pages */
+  .experience-page-v94{
+    padding-bottom:52px!important;
+  }
+
+  /* Non-booking portrait pages: show the COMPLETE supplied
+     mobile artwork inside the available viewport. */
+  .experience-page-v94:not(.page-booking-v94){
+    height:100svh!important;
+    min-height:100svh!important;
+    max-height:100svh!important;
+    overflow:hidden!important;
+    display:flex!important;
+    flex-direction:column!important;
+    background:#e41e2b!important;
+    padding-bottom:46px!important;
+  }
+
+  .experience-page-v94:not(.page-booking-v94) .page-header-v94{
+    flex:0 0 var(--v94-header)!important;
+  }
+
+  .experience-page-v94:not(.page-booking-v94) .artwork-page-v94{
+    flex:1 1 auto!important;
+    min-height:0!important;
+    width:100%!important;
+    background:#e41e2b!important;
+    overflow:hidden!important;
+    display:flex!important;
+    align-items:center!important;
+    justify-content:center!important;
+  }
+
+  .experience-page-v94:not(.page-booking-v94) .artwork-page-v94 picture{
+    width:100%!important;
+    height:100%!important;
+    display:flex!important;
+    align-items:center!important;
+    justify-content:center!important;
+  }
+
+  .experience-page-v94:not(.page-booking-v94) .artwork-page-v94 img{
+    width:100%!important;
+    height:100%!important;
+    max-width:100%!important;
+    max-height:100%!important;
+    object-fit:contain!important;
+    object-position:center center!important;
+  }
+
+  /* Booking/Section 4 stays naturally scrollable. */
+  .experience-page-v94.page-booking-v94{
+    min-height:calc(100svh - var(--v94-header))!important;
+    height:auto!important;
+    max-height:none!important;
+    overflow-y:auto!important;
+    overflow-x:hidden!important;
+    padding-bottom:62px!important;
+  }
+
+  .experience-page-v94.page-booking-v94 .page-footer-v94{
+    position:fixed!important;
+  }
+
+  /* Ensure both legal links remain visible even on 320px phones. */
+  .experience-page-v94 .footer-links-v94 a{
+    min-width:0!important;
+  }
+}
+
+/* =========================================================
+   V105 — SLICK MOBILE FOOTER + SEQUENTIAL PAGE NAVIGATION
+   ========================================================= */
+@media (max-width: 767px) {
+  .experience-page-v94 .page-footer-v94 {
+    position: relative !important;
+    width: 100% !important;
+    min-height: 122px !important;
+    height: 122px !important;
+    flex: 0 0 122px !important;
+    background: #e41e2b !important;
+    border-top: 0 !important;
+    color: #111 !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    text-align: center !important;
+    padding: 14px 12px 12px !important;
+    box-sizing: border-box !important;
+    z-index: 7000 !important;
+  }
+  .experience-page-v94 .footer-inner-v94 {
+    width: 100% !important;
+    max-width: none !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 18px !important;
+  }
+  .experience-page-v94 .footer-links-v94 {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 0 !important;
+    margin: 0 !important;
+    flex-wrap: nowrap !important;
+  }
+  .experience-page-v94 .footer-links-v94 a {
+    color: #111 !important;
+    font-size: 14px !important;
+    line-height: 1.1 !important;
+    font-weight: 800 !important;
+    text-decoration: none !important;
+    white-space: nowrap !important;
+    padding: 0 34px !important;
+  }
+  .experience-page-v94 .footer-links-v94 a + a::before {
+    display: none !important;
+    content: none !important;
+  }
+  .experience-page-v94 .footer-copy-v94 {
+    display: block !important;
+    color: #111 !important;
+    font-size: 14px !important;
+    line-height: 1.2 !important;
+    font-weight: 400 !important;
+    white-space: nowrap !important;
+    margin: 0 !important;
+  }
+  .experience-page-v94 .floating-nav-v94 {
+    position: fixed !important;
+    left: 0 !important;
+    right: 0 !important;
+    bottom: 132px !important;
+    z-index: 9000 !important;
+    padding: 0 10px !important;
+    pointer-events: none !important;
+  }
+  .experience-page-v94 .floating-nav-v94 .page-nav-v94 {
+    pointer-events: auto !important;
+  }
+  .experience-page-v94:not(.page-booking-v94) {
+    padding-bottom: 0 !important;
+  }
+  .experience-page-v94.page-booking-v94 .page-footer-v94 {
+    position: relative !important;
+    bottom: auto !important;
+  }
+}
+
+/* =========================================================
+   V106 — MOBILE ARTWORK FULL WIDTH + SLIM FOOTER
+   ========================================================= */
+@media (max-width: 767px) {
+  html, body {
+    width: 100% !important;
+    min-height: 100% !important;
+    height: auto !important;
+    overflow-x: hidden !important;
+    overflow-y: auto !important;
+  }
+
+  body.page-index-v94 {
+    min-height: 100svh !important;
+    height: auto !important;
+    overflow-x: hidden !important;
+    overflow-y: auto !important;
+  }
+
+  .experience-page-v94 {
+    width: 100% !important;
+    min-height: 100svh !important;
+    height: auto !important;
+    max-height: none !important;
+    overflow: visible !important;
+    display: flex !important;
+    flex-direction: column !important;
+    position: relative !important;
+  }
+
+  .experience-page-v94:not(.page-booking-v94) .page-header-v94 {
+    flex: 0 0 auto !important;
+  }
+
+  .experience-page-v94:not(.page-booking-v94) .artwork-page-v94 {
+    flex: 0 0 auto !important;
+    width: 100% !important;
+    min-height: 0 !important;
+    height: auto !important;
+    overflow: visible !important;
+    display: block !important;
+    background: #e41e2b !important;
+  }
+
+  .experience-page-v94:not(.page-booking-v94) .artwork-page-v94 picture {
+    display: block !important;
+    width: 100% !important;
+    height: auto !important;
+  }
+
+  .experience-page-v94:not(.page-booking-v94) .artwork-page-v94 img {
+    display: block !important;
+    width: 100% !important;
+    height: auto !important;
+    max-width: 100% !important;
+    max-height: none !important;
+    object-fit: contain !important;
+    object-position: center top !important;
+  }
+
+  /* Slim footer exactly in the requested style. */
+  .experience-page-v94 .page-footer-v94 {
+    position: relative !important;
+    width: 100% !important;
+    min-height: 82px !important;
+    height: 82px !important;
+    flex: 0 0 82px !important;
+    padding: 10px 8px !important;
+    margin: 0 !important;
+    background: #e41e2b !important;
+    color: #111 !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    box-sizing: border-box !important;
+    z-index: 7000 !important;
+  }
+
+  .experience-page-v94 .footer-inner-v94 {
+    width: 100% !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 9px !important;
+  }
+
+  .experience-page-v94 .footer-links-v94 {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 0 !important;
+    width: 100% !important;
+    margin: 0 !important;
+  }
+
+  .experience-page-v94 .footer-links-v94 a {
+    color: #111 !important;
+    font-size: 13px !important;
+    line-height: 1 !important;
+    font-weight: 800 !important;
+    text-decoration: none !important;
+    white-space: nowrap !important;
+    padding: 0 28px !important;
+  }
+
+  .experience-page-v94 .footer-copy-v94 {
+    display: block !important;
+    color: #111 !important;
+    font-size: 12px !important;
+    line-height: 1 !important;
+    font-weight: 400 !important;
+    white-space: nowrap !important;
+    margin: 0 !important;
+  }
+
+  /* Navigation stays above the footer and remains clickable. */
+  .experience-page-v94 .floating-nav-v94 {
+    position: fixed !important;
+    left: 0 !important;
+    right: 0 !important;
+    bottom: 92px !important;
+    z-index: 10000 !important;
+    padding: 0 10px !important;
+    pointer-events: none !important;
+  }
+
+  .experience-page-v94 .floating-nav-v94 .page-nav-v94 {
+    pointer-events: auto !important;
+    position: relative !important;
+    z-index: 10001 !important;
+  }
+
+  .experience-page-v94.page-booking-v94 {
+    min-height: 100svh !important;
+    height: auto !important;
+    max-height: none !important;
+    overflow-x: hidden !important;
+    overflow-y: auto !important;
+    padding-bottom: 0 !important;
+  }
+
+  .experience-page-v94.page-booking-v94 .page-footer-v94 {
+    position: relative !important;
+    bottom: auto !important;
+  }
+}
+
+
+/* =========================================================
+   V108 — ALL FOUR ARTWORK PAGES STACKED + BUTTON SCROLL
+   ========================================================= */
+html{scroll-behavior:smooth;}
+body.page-index-v94{overflow-y:auto!important;overflow-x:hidden!important;}
+.experience-page-v94{
+  display:block!important;
+  position:relative!important;
+  width:100%!important;
+  min-height:100svh!important;
+  height:auto!important;
+  max-height:none!important;
+  overflow:visible!important;
+  scroll-margin-top:0!important;
+  scroll-snap-align:start;
+}
+.experience-page-v94.is-active{display:block!important;}
+.experience-page-v94 .page-header-v94{position:relative!important;}
+.experience-page-v94 .floating-nav-v94{z-index:10000!important;}
+.experience-page-v94 .page-nav-v94:disabled{opacity:.35!important;visibility:hidden!important;}
+@media(max-width:767px){
+  .experience-page-v94{min-height:100svh!important;}
+  .experience-page-v94:not(.page-booking-v94) .artwork-page-v94 img{
+    width:100%!important;
+    height:auto!important;
+    max-height:none!important;
+    object-fit:contain!important;
+  }
+  .experience-page-v94 .page-footer-v94{height:82px!important;min-height:82px!important;flex:0 0 82px!important;}
+}
+
+
+/* V109 — single document scroll; each section is a normal stacked page. */
+html, body { scroll-behavior:smooth; overflow-x:hidden!important; overflow-y:auto!important; }
+.experience-page-v94 { display:block!important; height:auto!important; min-height:0!important; overflow:visible!important; position:relative; scroll-margin-top:0; }
+.experience-page-v94.is-active { display:block!important; }
+.page-nav-v94:disabled { visibility:hidden!important; pointer-events:none!important; }
+@media(max-width:767px){
+  .experience-page-v94 { min-height:0!important; overflow:visible!important; }
+  .artwork-page-v94 picture, .artwork-page-v94 img { width:100%!important; height:auto!important; max-width:100%!important; object-fit:contain!important; }
+  .page-footer-v94 { min-height:82px!important; padding:12px 10px 14px!important; }
+  .footer-inner-v94 { gap:4px!important; }
+  .footer-links-v94 { margin:0!important; gap:28px!important; }
+  .footer-links-v94 a { font-size:12px!important; }
+  .footer-copy-v94 { font-size:10px!important; line-height:1.25!important; }
+}
+
+
+/* V110 — only the navigation belonging to the visible section may receive clicks. */
+.experience-page-v94:not(.nav-current) .floating-nav-v94{
+  visibility:hidden!important;
+  pointer-events:none!important;
+}
+.experience-page-v94.nav-current .floating-nav-v94{
+  visibility:visible!important;
+  pointer-events:none!important;
+}
+.experience-page-v94.nav-current .floating-nav-v94 .page-nav-v94{
+  pointer-events:auto!important;
+}
+
+/* =========================================================
+   V111 — MOBILE/DESKTOP VIEWPORT PAGES + VISIBLE FOOTER
+   Each artwork page is one viewport. No internal page scroll.
+   Body scroll/snap moves between pages; NEXT/BACK also move pages.
+   ========================================================= */
+html, body {
+  scroll-behavior: smooth !important;
+  overflow-x: hidden !important;
+  overflow-y: auto !important;
+}
+body.page-index-v94 {
+  scroll-snap-type: y proximity;
+}
+
+.experience-page-v94:not(.page-booking-v94) {
+  position: relative !important;
+  display: flex !important;
+  flex-direction: column !important;
+  width: 100% !important;
+  height: 100svh !important;
+  min-height: 100svh !important;
+  max-height: 100svh !important;
+  overflow: hidden !important;
+  scroll-snap-align: start !important;
+  scroll-snap-stop: always !important;
+  box-sizing: border-box !important;
+  background: #e41e2b !important;
+}
+
+.experience-page-v94:not(.page-booking-v94) .page-header-v94 {
+  flex: 0 0 var(--v94-header) !important;
+  height: var(--v94-header) !important;
+  min-height: var(--v94-header) !important;
+  box-sizing: border-box !important;
+}
+
+.experience-page-v94:not(.page-booking-v94) .artwork-page-v94 {
+  flex: 1 1 auto !important;
+  min-height: 0 !important;
+  width: 100% !important;
+  overflow: hidden !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  box-sizing: border-box !important;
+  background: #e41e2b !important;
+}
+
+.experience-page-v94:not(.page-booking-v94) .artwork-page-v94 picture {
+  width: 100% !important;
+  height: 100% !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+.experience-page-v94:not(.page-booking-v94) .artwork-page-v94 img {
+  display: block !important;
+  width: 100% !important;
+  height: 100% !important;
+  max-width: 100% !important;
+  max-height: 100% !important;
+  object-fit: contain !important;
+  object-position: center center !important;
+}
+
+.experience-page-v94:not(.page-booking-v94) .page-footer-v94 {
+  position: absolute !important;
+  left: 0 !important;
+  right: 0 !important;
+  bottom: 0 !important;
+  width: 100% !important;
+  height: 82px !important;
+  min-height: 82px !important;
+  max-height: 82px !important;
+  z-index: 7000 !important;
+  box-sizing: border-box !important;
+  background: #e41e2b !important;
+  color: #111 !important;
+}
+
+.experience-page-v94:not(.page-booking-v94) .floating-nav-v94 {
+  position: absolute !important;
+  left: 0 !important;
+  right: 0 !important;
+  bottom: 94px !important;
+  z-index: 10000 !important;
+  pointer-events: none !important;
+}
+.experience-page-v94:not(.page-booking-v94) .floating-nav-v94 .page-nav-v94 {
+  pointer-events: auto !important;
+}
+
+@media (max-width: 767px) {
+  .experience-page-v94:not(.page-booking-v94) {
+    height: 100svh !important;
+    min-height: 100svh !important;
+    max-height: 100svh !important;
+  }
+  .experience-page-v94:not(.page-booking-v94) .page-footer-v94 {
+    height: 82px !important;
+    min-height: 82px !important;
+    max-height: 82px !important;
+    padding: 10px 8px !important;
+  }
+  .experience-page-v94:not(.page-booking-v94) .artwork-page-v94 {
+    padding-bottom: 0 !important;
+  }
+  .experience-page-v94:not(.page-booking-v94) .artwork-page-v94 img {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: contain !important;
+  }
+}
+
+/* Section 4 keeps its existing booking content; its page can grow when required. */
+.experience-page-v94.page-booking-v94 {
+  scroll-snap-align: start !important;
+  scroll-snap-stop: always !important;
+}
+
+
+/* V112 — strict slide mode for artwork sections. No page scrolling. */
+html, body {
+  width:100% !important;
+  height:100% !important;
+  overflow:hidden !important;
+}
+body.page-index-v94 { overflow:hidden !important; }
+.lal-page-v94 {
+  position:relative !important;
+  width:100% !important;
+  height:calc(100vh - var(--v94-header, 62px)) !important;
+  min-height:0 !important;
+  overflow:hidden !important;
+}
+.experience-page-v94 {
+  position:absolute !important;
+  inset:0 !important;
+  width:100% !important;
+  height:100% !important;
+  min-height:0 !important;
+  max-height:none !important;
+  margin:0 !important;
+  padding:0 !important;
+  overflow:hidden !important;
+  display:none !important;
+  box-sizing:border-box !important;
+}
+.experience-page-v94.is-active,
+.experience-page-v94.nav-current { display:block !important; }
+.experience-page-v94[aria-hidden="true"] { visibility:hidden !important; pointer-events:none !important; }
+.experience-page-v94[aria-hidden="false"] { visibility:visible !important; pointer-events:auto !important; }
+
+/* Artwork pages: supplied 1920x1080 desktop artwork fills the slide without distortion. */
+.experience-page-v94:not(.page-booking-v94) .artwork-page-v94 {
+  position:absolute !important;
+  inset:0 !important;
+  width:100% !important;
+  height:100% !important;
+  padding:0 !important;
+  background:#e41e2b !important;
+  overflow:hidden !important;
+  display:flex !important;
+  align-items:center !important;
+  justify-content:center !important;
+}
+.experience-page-v94:not(.page-booking-v94) .artwork-page-v94 picture {
+  width:100% !important;
+  height:100% !important;
+  display:flex !important;
+  align-items:center !important;
+  justify-content:center !important;
+}
+.experience-page-v94:not(.page-booking-v94) .artwork-page-v94 img {
+  display:block !important;
+  width:100% !important;
+  height:100% !important;
+  max-width:100% !important;
+  max-height:100% !important;
+  object-fit:contain !important;
+  object-position:center center !important;
+}
+.experience-page-v94:not(.page-booking-v94) .page-footer-v94 {
+  position:absolute !important;
+  left:0 !important;
+  right:0 !important;
+  bottom:0 !important;
+  width:100% !important;
+  height:64px !important;
+  min-height:64px !important;
+  max-height:64px !important;
+  padding:8px 16px !important;
+  box-sizing:border-box !important;
+  background:#e41e2b !important;
+  z-index:7000 !important;
+}
+.experience-page-v94:not(.page-booking-v94) .floating-nav-v94 {
+  position:absolute !important;
+  left:0 !important;
+  right:0 !important;
+  bottom:76px !important;
+  z-index:10000 !important;
+  pointer-events:none !important;
+}
+.experience-page-v94:not(.page-booking-v94) .floating-nav-v94 .page-nav-v94 { pointer-events:auto !important; }
+
+@media (max-width:767px) {
+  :root { --v94-header:62px; }
+  .lal-page-v94 { height:calc(100svh - var(--v94-header)) !important; }
+  .experience-page-v94:not(.page-booking-v94) .page-footer-v94 {
+    height:64px !important; min-height:64px !important; max-height:64px !important;
+    padding:7px 8px !important;
+  }
+  .experience-page-v94:not(.page-booking-v94) .floating-nav-v94 { bottom:74px !important; padding:0 10px !important; }
+  .experience-page-v94:not(.page-booking-v94) .page-nav-v94 { min-width:78px !important; padding:10px 12px !important; font-size:10px !important; }
+}
+
+/* Section 4 remains independently scrollable only for its booking controls. */
+.experience-page-v94.page-booking-v94 { overflow:auto !important; }
+
+/* =========================================================
+   V115 — CLEAN FULL-ARTWORK MANUAL SLIDE MODE
+   Each slide is exactly one viewport. Header + complete artwork + footer
+   fit inside the viewport. NEXT/BACK are the only page navigation.
+   ========================================================= */
+html.lal-slide-mode-v115,
+html.lal-slide-mode-v115 body,
+body.lal-slide-mode-v115{
+  width:100% !important;
+  height:100% !important;
+  overflow:hidden !important;
+  overscroll-behavior:none !important;
+}
+
+body.lal-slide-mode-v115 .lal-page-v94{
+  position:relative !important;
+  width:100% !important;
+  height:100svh !important;
+  min-height:100svh !important;
+  max-height:100svh !important;
+  overflow:hidden !important;
+}
+
+body.lal-slide-mode-v115 .experience-page-v94{
+  position:absolute !important;
+  inset:0 !important;
+  display:none !important;
+  width:100% !important;
+  height:100svh !important;
+  min-height:100svh !important;
+  max-height:100svh !important;
+  margin:0 !important;
+  padding:0 !important;
+  overflow:hidden !important;
+  box-sizing:border-box !important;
+  flex-direction:column !important;
+  background:#e41e2b !important;
+}
+
+body.lal-slide-mode-v115 .experience-page-v94.nav-current,
+body.lal-slide-mode-v115 .experience-page-v94.is-active{
+  display:flex !important;
+  visibility:visible !important;
+  pointer-events:auto !important;
+}
+
+body.lal-slide-mode-v115 .experience-page-v94[aria-hidden="true"]{
+  visibility:hidden !important;
+  pointer-events:none !important;
+}
+
+/* Header is part of the slide. */
+body.lal-slide-mode-v115 .experience-page-v94 .page-header-v94{
+  position:relative !important;
+  z-index:11000 !important;
+  flex:0 0 var(--v94-header,76px) !important;
+  width:100% !important;
+  height:var(--v94-header,76px) !important;
+  min-height:var(--v94-header,76px) !important;
+  max-height:var(--v94-header,76px) !important;
+}
+
+/* Artwork gets only the space left after header and footer. */
+body.lal-slide-mode-v115 .experience-page-v94:not(.page-booking-v94) .artwork-page-v94{
+  position:relative !important;
+  flex:1 1 auto !important;
+  width:100% !important;
+  height:auto !important;
+  min-height:0 !important;
+  max-height:none !important;
+  margin:0 !important;
+  padding:0 !important;
+  display:flex !important;
+  align-items:center !important;
+  justify-content:center !important;
+  overflow:hidden !important;
+  background:#e41e2b !important;
+  line-height:0 !important;
+}
+
+body.lal-slide-mode-v115 .experience-page-v94:not(.page-booking-v94) .artwork-page-v94 picture{
+  display:flex !important;
+  align-items:center !important;
+  justify-content:center !important;
+  width:100% !important;
+  height:100% !important;
+  min-height:0 !important;
+  max-height:100% !important;
+}
+
+body.lal-slide-mode-v115 .experience-page-v94:not(.page-booking-v94) .artwork-page-v94 img{
+  display:block !important;
+  width:100% !important;
+  height:100% !important;
+  max-width:100% !important;
+  max-height:100% !important;
+  min-width:0 !important;
+  min-height:0 !important;
+  object-fit:contain !important;
+  object-position:center center !important;
+}
+
+/* Footer is a normal flex item, NOT an overlay. This keeps the artwork's
+   bottom legal line visible. */
+body.lal-slide-mode-v115 .experience-page-v94:not(.page-booking-v94) .page-footer-v94{
+  position:relative !important;
+  left:auto !important;
+  right:auto !important;
+  bottom:auto !important;
+  flex:0 0 64px !important;
+  width:100% !important;
+  height:64px !important;
+  min-height:64px !important;
+  max-height:64px !important;
+  padding:6px 12px !important;
+  box-sizing:border-box !important;
+  background:#e41e2b !important;
+  border-top:0 !important;
+  z-index:12000 !important;
+}
+
+/* Navigation sits above the footer without covering the artwork's bottom. */
+body.lal-slide-mode-v115 .experience-page-v94:not(.page-booking-v94) .floating-nav-v94{
+  position:absolute !important;
+  left:0 !important;
+  right:0 !important;
+  bottom:76px !important;
+  z-index:13000 !important;
+  pointer-events:none !important;
+}
+body.lal-slide-mode-v115 .experience-page-v94:not(.page-booking-v94) .floating-nav-v94 .page-nav-v94{
+  pointer-events:auto !important;
+}
+
+/* Booking slide retains its own internal scrolling for booking controls. */
+body.lal-slide-mode-v115 .experience-page-v94.page-booking-v94{
+  overflow:auto !important;
+  -webkit-overflow-scrolling:touch !important;
+}
+body.lal-slide-mode-v115 .experience-page-v94.page-booking-v94 .floating-nav-v94{
+  position:fixed !important;
+  bottom:16px !important;
+  z-index:13000 !important;
+}
+
+@media(max-width:767px){
+  body.lal-slide-mode-v115 .experience-page-v94 .page-header-v94{
+    flex-basis:62px !important;
+    height:62px !important;
+    min-height:62px !important;
+    max-height:62px !important;
+  }
+  body.lal-slide-mode-v115 .experience-page-v94:not(.page-booking-v94) .page-footer-v94{
+    flex-basis:64px !important;
+    height:64px !important;
+    min-height:64px !important;
+    max-height:64px !important;
+    padding:6px 8px !important;
+  }
+  body.lal-slide-mode-v115 .experience-page-v94:not(.page-booking-v94) .floating-nav-v94{
+    bottom:72px !important;
+    padding:0 10px !important;
+  }
+}
+
+/* V116 — exact-ratio artwork fit for supplied desktop/mobile masters.
+   Desktop masters: 2048x980 (2.0898:1).
+   Mobile masters: 1152x1600 (0.72:1).
+   Footer is intentionally slim so the artwork gets the correct aspect-ratio viewport.
+*/
+@media (min-width:768px){
+  body.lal-slide-mode-v115 .experience-page-v94:not(.page-booking-v94) .page-footer-v94{
+    flex:0 0 35px !important;
+    height:35px !important;
+    min-height:35px !important;
+    max-height:35px !important;
+    padding:2px 10px !important;
+  }
+  body.lal-slide-mode-v115 .experience-page-v94:not(.page-booking-v94) .artwork-page-v94 img{
+    width:100% !important;
+    height:100% !important;
+    max-width:100% !important;
+    max-height:100% !important;
+    object-fit:contain !important;
+    object-position:center center !important;
+  }
+  body.lal-slide-mode-v115 .experience-page-v94:not(.page-booking-v94) .artwork-page-v94 picture{
+    width:100% !important;
+    height:100% !important;
+  }
+}
+@media (max-width:767px){
+  body.lal-slide-mode-v115 .experience-page-v94:not(.page-booking-v94) .page-footer-v94{
+    flex:0 0 64px !important;
+    height:64px !important;
+    min-height:64px !important;
+    max-height:64px !important;
+  }
+  body.lal-slide-mode-v115 .experience-page-v94:not(.page-booking-v94) .artwork-page-v94 img{
+    width:100% !important;
+    height:100% !important;
+    max-width:100% !important;
+    max-height:100% !important;
+    object-fit:contain !important;
+    object-position:center center !important;
+  }
+  body.lal-slide-mode-v115 .experience-page-v94:not(.page-booking-v94) .artwork-page-v94 picture{
+    width:100% !important;
+    height:100% !important;
+  }
+}
+
+/* =========================================================
+   V117 — OPTION 1: TRUE FULL-VIEWPORT ARTWORK SLIDES
+   Header + footer overlay the artwork instead of consuming
+   vertical layout space. Desktop/mobile artwork covers the
+   complete slide viewport.
+   ========================================================= */
+html.lal-slide-mode-v115,
+body.lal-slide-mode-v115{
+  width:100%!important;
+  height:100%!important;
+  min-height:100%!important;
+  margin:0!important;
+  padding:0!important;
+  overflow:hidden!important;
+  overscroll-behavior:none!important;
+}
+
+body.lal-slide-mode-v115 .lal-page-v94{
+  position:relative!important;
+  width:100%!important;
+  height:100svh!important;
+  min-height:100svh!important;
+  max-height:100svh!important;
+  overflow:hidden!important;
+  margin:0!important;
+  padding:0!important;
+}
+
+body.lal-slide-mode-v115 .experience-page-v94{
+  display:none!important;
+  position:fixed!important;
+  inset:0!important;
+  width:100vw!important;
+  height:100svh!important;
+  min-height:100svh!important;
+  max-height:100svh!important;
+  margin:0!important;
+  padding:0!important;
+  overflow:hidden!important;
+  background:#e41e2b!important;
+  isolation:isolate!important;
+}
+
+body.lal-slide-mode-v115 .experience-page-v94.nav-current{
+  display:block!important;
+}
+
+body.lal-slide-mode-v115 .experience-page-v94:not(.page-booking-v94) .artwork-page-v94{
+  position:absolute!important;
+  inset:0!important;
+  width:100vw!important;
+  height:100svh!important;
+  min-height:0!important;
+  margin:0!important;
+  padding:0!important;
+  display:block!important;
+  overflow:hidden!important;
+  background:#e41e2b!important;
+  z-index:1!important;
+}
+
+body.lal-slide-mode-v115 .experience-page-v94:not(.page-booking-v94) .artwork-page-v94 picture,
+body.lal-slide-mode-v115 .experience-page-v94:not(.page-booking-v94) .artwork-page-v94 img{
+  display:block!important;
+  width:100vw!important;
+  height:100svh!important;
+  min-width:100vw!important;
+  min-height:100svh!important;
+  max-width:none!important;
+  max-height:none!important;
+  margin:0!important;
+  padding:0!important;
+}
+
+body.lal-slide-mode-v115 .experience-page-v94:not(.page-booking-v94) .artwork-page-v94 img{
+  object-fit:cover!important;
+  object-position:center center!important;
+}
+
+/* Header overlays the artwork. */
+body.lal-slide-mode-v115 .experience-page-v94:not(.page-booking-v94) .page-header-v94{
+  position:absolute!important;
+  top:0!important;
+  left:0!important;
+  right:0!important;
+  width:100%!important;
+  height:var(--v94-header)!important;
+  min-height:var(--v94-header)!important;
+  margin:0!important;
+  z-index:5000!important;
+}
+
+/* Footer overlays the artwork; it does not reduce artwork size. */
+body.lal-slide-mode-v115 .experience-page-v94:not(.page-booking-v94) .page-footer-v94{
+  position:absolute!important;
+  left:0!important;
+  right:0!important;
+  bottom:0!important;
+  width:100%!important;
+  height:52px!important;
+  min-height:52px!important;
+  max-height:52px!important;
+  margin:0!important;
+  padding:4px 12px!important;
+  box-sizing:border-box!important;
+  background:rgba(228,30,43,.94)!important;
+  border-top:0!important;
+  z-index:5000!important;
+  display:flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+}
+
+body.lal-slide-mode-v115 .experience-page-v94:not(.page-booking-v94) .footer-inner-v94{
+  width:100%!important;
+  max-width:none!important;
+  display:flex!important;
+  flex-direction:column!important;
+  align-items:center!important;
+  justify-content:center!important;
+  gap:2px!important;
+  line-height:1!important;
+}
+
+body.lal-slide-mode-v115 .experience-page-v94:not(.page-booking-v94) .footer-links-v94{
+  display:flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+  gap:24px!important;
+  margin:0!important;
+}
+
+body.lal-slide-mode-v115 .experience-page-v94:not(.page-booking-v94) .footer-links-v94 a{
+  color:#111!important;
+  font-size:11px!important;
+  line-height:1!important;
+  font-weight:800!important;
+  text-decoration:none!important;
+  white-space:nowrap!important;
+}
+
+body.lal-slide-mode-v115 .experience-page-v94:not(.page-booking-v94) .footer-copy-v94{
+  display:block!important;
+  color:#111!important;
+  font-size:9px!important;
+  line-height:1!important;
+  white-space:nowrap!important;
+}
+
+body.lal-slide-mode-v115 .experience-page-v94:not(.page-booking-v94) .floating-nav-v94{
+  position:absolute!important;
+  left:0!important;
+  right:0!important;
+  bottom:72px!important;
+  z-index:6000!important;
+  pointer-events:none!important;
+}
+
+body.lal-slide-mode-v115 .experience-page-v94:not(.page-booking-v94) .floating-nav-v94 .page-nav-v94{
+  pointer-events:auto!important;
+}
+
+/* Booking slide remains an internally scrollable slide. */
+body.lal-slide-mode-v115 .experience-page-v94.page-booking-v94{
+  overflow-y:auto!important;
+  overflow-x:hidden!important;
+  -webkit-overflow-scrolling:touch!important;
+}
+
+@media(max-width:767px){
+  body.lal-slide-mode-v115 .experience-page-v94:not(.page-booking-v94) .page-footer-v94{
+    height:64px!important;
+    min-height:64px!important;
+    max-height:64px!important;
+    padding:5px 8px!important;
+  }
+  body.lal-slide-mode-v115 .experience-page-v94:not(.page-booking-v94) .footer-links-v94{
+    gap:18px!important;
+  }
+  body.lal-slide-mode-v115 .experience-page-v94:not(.page-booking-v94) .footer-links-v94 a{
+    font-size:10px!important;
+  }
+  body.lal-slide-mode-v115 .experience-page-v94:not(.page-booking-v94) .footer-copy-v94{
+    font-size:8px!important;
+  }
+  body.lal-slide-mode-v115 .experience-page-v94:not(.page-booking-v94) .floating-nav-v94{
+    bottom:78px!important;
+    padding-left:10px!important;
+    padding-right:10px!important;
+  }
+}
+
+/* V118 CLEAN ARTWORK RULES: desktop cover, mobile complete-artwork contain */
+body.lal-slide-mode-v115 .experience-page-v94:not(.page-booking-v94) .artwork-page-v94 img{
+  object-fit:cover !important;
+  object-position:center center !important;
+}
+
+@media (max-width:767px){
+  body.lal-slide-mode-v115 .experience-page-v94:not(.page-booking-v94) .artwork-page-v94{
+    display:flex!important;
+    align-items:center!important;
+    justify-content:center!important;
+    background:#e41e2b!important;
+  }
+  body.lal-slide-mode-v115 .experience-page-v94:not(.page-booking-v94) .artwork-page-v94 picture{
+    display:flex!important;
+    align-items:center!important;
+    justify-content:center!important;
+    width:100%!important;
+    height:100%!important;
+    overflow:hidden!important;
+  }
+  body.lal-slide-mode-v115 .experience-page-v94:not(.page-booking-v94) .artwork-page-v94 img{
+    width:100%!important;
+    height:auto!important;
+    min-width:0!important;
+    min-height:0!important;
+    max-width:100%!important;
+    max-height:100%!important;
+    object-fit:contain!important;
+    object-position:center center!important;
+    flex:0 0 auto!important;
+  }
+}
+
+/* V119 — mobile artwork starts immediately under the overlaid header.
+   Keep the supplied 1152x1600 artwork fully visible at native aspect ratio;
+   remove the vertical centering that created the blank red band above it. */
+@media (max-width:767px){
+  body.lal-slide-mode-v115 .experience-page-v94:not(.page-booking-v94) .artwork-page-v94{
+    align-items:flex-start!important;
+    justify-content:center!important;
+  }
+  body.lal-slide-mode-v115 .experience-page-v94:not(.page-booking-v94) .artwork-page-v94 picture{
+    width:100%!important;
+    height:auto!important;
+    min-height:0!important;
+    max-height:none!important;
+    align-items:flex-start!important;
+    justify-content:center!important;
+  }
+  body.lal-slide-mode-v115 .experience-page-v94:not(.page-booking-v94) .artwork-page-v94 img{
+    display:block!important;
+    width:100%!important;
+    height:auto!important;
+    max-width:100%!important;
+    max-height:none!important;
+    object-fit:contain!important;
+    object-position:top center!important;
+  }
+}
+
+
+/* V121 — mobile viewport regression fix. Keep artwork pages viewport-locked;
+   artwork starts directly below the header, while navigation/footer overlay it.
+   Booking page remains in normal internal scroll layout. */
+@media (max-width:767px){
+  html, body{
+    width:100%!important;
+    max-width:100%!important;
+    height:100%!important;
+    min-height:100%!important;
+    overflow:hidden!important;
+  }
+  body.lal-slide-mode-v115 .experience-page-v94:not(.page-booking-v94){
+    position:fixed!important;
+    inset:0!important;
+    width:100vw!important;
+    height:100vh!important;
+    height:100dvh!important;
+    min-height:0!important;
+    max-height:100vh!important;
+    max-height:100dvh!important;
+    margin:0!important;
+    padding:0!important;
+    overflow:hidden!important;
+    background:#e41e2b!important;
+  }
+  body.lal-slide-mode-v115 .experience-page-v94:not(.page-booking-v94) .page-header-v94,
+  body.lal-slide-mode-v115 .experience-page-v94:not(.page-booking-v94) .site-header-v94{
+    position:absolute!important;
+    top:0!important;
+    left:0!important;
+    right:0!important;
+    height:var(--v94-header)!important;
+    min-height:var(--v94-header)!important;
+    z-index:6000!important;
+  }
+  body.lal-slide-mode-v115 .experience-page-v94:not(.page-booking-v94) .artwork-page-v94{
+    position:absolute!important;
+    top:var(--v94-header)!important;
+    left:0!important;
+    right:0!important;
+    bottom:0!important;
+    width:100%!important;
+    height:auto!important;
+    min-height:0!important;
+    max-height:none!important;
+    display:block!important;
+    overflow:hidden!important;
+    background:#e41e2b!important;
+    line-height:0!important;
+  }
+  body.lal-slide-mode-v115 .experience-page-v94:not(.page-booking-v94) .artwork-page-v94 picture{
+    display:block!important;
+    width:100%!important;
+    height:auto!important;
+    min-height:0!important;
+    max-height:none!important;
+    margin:0!important;
+  }
+  body.lal-slide-mode-v115 .experience-page-v94:not(.page-booking-v94) .artwork-page-v94 img{
+    display:block!important;
+    width:100%!important;
+    height:auto!important;
+    min-height:0!important;
+    max-height:none!important;
+    max-width:100%!important;
+    object-fit:contain!important;
+    object-position:top center!important;
+  }
+  body.lal-slide-mode-v115 .experience-page-v94:not(.page-booking-v94) .page-footer-v94{
+    position:fixed!important;
+    left:0!important;
+    right:0!important;
+    bottom:0!important;
+    width:100%!important;
+    min-height:60px!important;
+    height:auto!important;
+    padding:10px 10px 20px!important;
+    margin:0!important;
+    z-index:5500!important;
+    background:rgba(228,30,43,.94)!important;
+    border-top:1px solid rgba(255,255,255,.2)!important;
+  }
+  body.lal-slide-mode-v115 .experience-page-v94:not(.page-booking-v94) .footer-inner-v94{gap:3px!important}
+  body.lal-slide-mode-v115 .experience-page-v94:not(.page-booking-v94) .footer-links-v94{gap:18px!important;margin:0!important}
+  body.lal-slide-mode-v115 .experience-page-v94:not(.page-booking-v94) .footer-links-v94 a{color:#111!important;font-size:10px!important}
+  body.lal-slide-mode-v115 .experience-page-v94:not(.page-booking-v94) .footer-copy-v94{font-size:9px!important;line-height:1.2!important}
+  body.lal-slide-mode-v115 .experience-page-v94:not(.page-booking-v94) .floating-nav-v94{
+    position:fixed!important;
+    left:0!important;
+    right:0!important;
+    bottom:76px!important;
+    padding:0 10px!important;
+    z-index:7000!important;
+  }
+}
+
+
+
+/* Restored date-selection feedback: subtle red pulse and red checkmark */
+.date-btn, .date-option, .lb-date {
+  transition: transform .18s ease, box-shadow .18s ease, background-color .18s ease, border-color .18s ease;
+}
+.date-selected-animate {
+  animation: dateSelectPulse .62s ease-out;
+  box-shadow: 0 0 0 4px rgba(228,30,43,.18), 0 8px 20px rgba(228,30,43,.14) !important;
+  transform: translateY(-2px) scale(1.025);
+  position: relative;
+}
+/* V126 fix: checkmark is drawn only by #dateButtons .date-btn.selected::after below. */
+@keyframes dateSelectPulse {
+  0% { transform: scale(1); }
+  45% { transform: translateY(-2px) scale(1.035); }
+  100% { transform: translateY(-2px) scale(1.025); }
+}
+@keyframes dateCheckIn {
+  from { opacity: 0; transform: scale(.4); }
+  to { opacity: 1; transform: scale(1); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .date-selected-animate, .date-selected-animate::after { animation: none !important; }
+  .date-btn, .date-option, .lb-date { transition: none !important; }
+}
+
+
+
+/* Restored T&C page scrolling: prevent fixed-height/overflow locks on legal pages */
+html.terms-scroll-page,
+html.terms-scroll-page body,
+body.terms-scroll-page {
+  height: auto !important;
+  min-height: 100% !important;
+  max-height: none !important;
+  overflow-x: hidden !important;
+  overflow-y: auto !important;
+  position: static !important;
+  inset: auto !important;
+}
+html.terms-scroll-page body {
+  display: block !important;
+  padding-bottom: 0 !important;
+}
+body.terms-scroll-page main.legal-page-v94,
+body.terms-scroll-page .legal-inner-v94 {
+  display: block !important;
+  height: auto !important;
+  min-height: 0 !important;
+  max-height: none !important;
+  overflow: visible !important;
+  position: static !important;
+  inset: auto !important;
+  transform: none !important;
+}
+body.terms-scroll-page main.legal-page-v94 {
+  padding-bottom: 120px !important;
+}
+body.terms-scroll-page footer,
+body.terms-scroll-page .site-footer,
+body.terms-scroll-page .page-footer {
+  position: relative !important;
+  bottom: auto !important;
+}
+
+
+/* V123 targeted repair: preserve date-card dimensions; show selection as an overlay. */
+#dateButtons .date-btn {
+  position: relative !important;
+  box-sizing: border-box !important;
+}
+#dateButtons .date-btn.selected::after {
+  content: "✓";
+  position: absolute;
+  top: 4px;
+  right: 4px;
+  width: 17px;
+  height: 17px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: #e41e2b;
+  color: #fff;
+  font: 700 11px/1 Arial, sans-serif;
+  z-index: 4;
+  pointer-events: none;
+}
+#dateButtons .date-btn.date-selected-animate {
+  animation: dateSelectPulse .62s ease-out !important;
+}
+@media (prefers-reduced-motion: reduce) {
+  #dateButtons .date-btn.date-selected-animate { animation: none !important; }
+}
+/* Terms page class is assigned server-side in header.php, not by inline JavaScript. */
+html.terms-scroll-page, html.terms-scroll-page body, body.terms-scroll-page {
+  height: auto !important; min-height: 100% !important; max-height: none !important;
+  overflow-x: hidden !important; overflow-y: auto !important;
+  position: static !important; inset: auto !important;
+}
+html.terms-scroll-page body { display: block !important; padding-bottom: 0 !important; }
+body.terms-scroll-page main.legal-page-v94,
+body.terms-scroll-page .legal-inner-v94 {
+  display: block !important; height: auto !important; min-height: 0 !important;
+  max-height: none !important; overflow: visible !important;
+  position: static !important; inset: auto !important; transform: none !important;
+}
+body.terms-scroll-page main.legal-page-v94 { padding-bottom: 120px !important; }
+body.terms-scroll-page footer, body.terms-scroll-page .site-footer,
+body.terms-scroll-page .page-footer-v94 { position: relative !important; bottom: auto !important; }
+
+
+/* V124 repair: legal documents must scroll independently from the artwork slide lock. */
+html.legal-scroll-page,
+html.legal-scroll-page body,
+body.legal-scroll-page {
+  height: auto !important;
+  min-height: 100% !important;
+  max-height: none !important;
+  overflow-x: hidden !important;
+  overflow-y: auto !important;
+  position: static !important;
+  inset: auto !important;
+}
+html.legal-scroll-page { display: block !important; }
+body.legal-scroll-page {
+  display: block !important;
+  padding-bottom: 0 !important;
+  touch-action: pan-y !important;
+}
+body.legal-scroll-page main.legal-page-v94,
+body.legal-scroll-page .legal-inner-v94 {
+  display: block !important;
+  height: auto !important;
+  min-height: 0 !important;
+  max-height: none !important;
+  overflow: visible !important;
+  position: static !important;
+  inset: auto !important;
+  transform: none !important;
+}
+body.legal-scroll-page main.legal-page-v94 { padding-bottom: 120px !important; }
+body.legal-scroll-page .page-footer-v94,
+body.legal-scroll-page footer,
+body.legal-scroll-page .site-footer,
+body.legal-scroll-page .page-footer {
+  position: relative !important;
+  bottom: auto !important;
+}
+
+/* Capacity text is separate from seat buttons, so it does not resize the grid. */
+.seat-capacity-summary {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px 14px;
+  margin-top: 10px;
+  padding: 10px 12px;
+  border: 1px solid rgba(228,30,43,.22);
+  border-radius: 8px;
+  background: #fff8f8;
+  color: #222;
+  font-size: 13px;
+  line-height: 1.4;
+  font-weight: 800;
+}
+.seat-capacity-summary span:last-child { color: #e41e2b; }
+@media (max-width: 767px) {
+  .seat-capacity-summary { font-size: 12px; padding: 9px 10px; }
+}
+
+
+/* V125 — remove the unwanted red gradient overlay from the booking map panel.
+   Keep the supplied textured red map artwork and white road lines unchanged. */
+.page-booking-v94 .section4-hotspot,
+.page-booking-v94 .section4-hotspot .kolkata-map-art {
+  background-image: none !important;
+}
+.page-booking-v94 .section4-hotspot::before,
+.page-booking-v94 .section4-hotspot::after,
+.page-booking-v94 .section4-hotspot .kolkata-map-art::before,
+.page-booking-v94 .section4-hotspot .kolkata-map-art::after {
+  content: none !important;
+  display: none !important;
+  background: none !important;
+  opacity: 0 !important;
+}

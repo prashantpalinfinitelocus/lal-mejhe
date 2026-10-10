@@ -1,0 +1,19 @@
+-- HOSTINGER READY: Select existing database before import
+DROP TABLE IF EXISTS bookings; DROP TABLE IF EXISTS slots; DROP TABLE IF EXISTS locations;
+CREATE TABLE locations(id INT AUTO_INCREMENT PRIMARY KEY,name VARCHAR(100) NOT NULL,slug VARCHAR(100) NOT NULL UNIQUE,banner VARCHAR(255),description TEXT,address VARCHAR(255),map_embed TEXT,direction_url TEXT,active TINYINT(1) DEFAULT 1) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+CREATE TABLE slots(id INT AUTO_INCREMENT PRIMARY KEY,location_id INT NOT NULL,slot_date DATE NOT NULL,slot_time VARCHAR(50) NOT NULL,max_seats INT DEFAULT 15,active TINYINT(1) DEFAULT 1,FOREIGN KEY(location_id) REFERENCES locations(id) ON DELETE CASCADE) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+CREATE TABLE bookings(id INT AUTO_INCREMENT PRIMARY KEY,booking_code VARCHAR(30) NOT NULL UNIQUE,name VARCHAR(100) NOT NULL,whatsapp VARCHAR(30) NOT NULL,location_id INT NOT NULL,slot_id INT NOT NULL,seats VARCHAR(100) NOT NULL,status ENUM('confirmed','cancelled') DEFAULT 'confirmed',created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,FOREIGN KEY(location_id) REFERENCES locations(id) ON DELETE CASCADE,FOREIGN KEY(slot_id) REFERENCES slots(id) ON DELETE CASCADE) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+INSERT INTO locations(name,slug,banner,description,address,direction_url,active) VALUES
+('Victoria Memorial','victoria-memorial','assets/kolkata-hero.png','A heritage experience in the heart of Kolkata.','1, Queens Way, Kolkata','https://www.google.com/maps/dir/?api=1&destination=Victoria+Memorial+Kolkata',1),
+('Howrah Bridge','howrah-bridge','assets/kolkata-hero.png','Iconic riverside experience.','Howrah Bridge, Kolkata','https://www.google.com/maps/dir/?api=1&destination=Howrah+Bridge+Kolkata',1),
+('Indian Museum','indian-museum','assets/kolkata-hero.png','Explore history and culture.','27, Jawaharlal Nehru Rd, Kolkata','https://www.google.com/maps/dir/?api=1&destination=Indian+Museum+Kolkata',1),
+('Park Street','park-street','assets/kolkata-hero.png','Food, music and Kolkata nightlife.','Park Street, Kolkata','https://www.google.com/maps/dir/?api=1&destination=Park+Street+Kolkata',1),
+('Prinsep Ghat','prinsep-ghat','assets/kolkata-hero.png','Beautiful Hooghly river experience.','Prinsep Ghat, Kolkata','https://www.google.com/maps/dir/?api=1&destination=Prinsep+Ghat+Kolkata',1),
+('Marble Palace','marble-palace','assets/kolkata-hero.png','Historic art and architecture.','46, Muktaram Babu Street, Kolkata','https://www.google.com/maps/dir/?api=1&destination=Marble+Palace+Kolkata',1),
+('Science City','science-city','assets/kolkata-hero.png','Interactive science experience.','JBS Haldane Ave, Kolkata','https://www.google.com/maps/dir/?api=1&destination=Science+City+Kolkata',1),
+('Eco Park','eco-park','assets/kolkata-hero.png','Nature and recreation.','New Town, Kolkata','https://www.google.com/maps/dir/?api=1&destination=Eco+Park+Kolkata',1),
+('Dakshineswar','dakshineswar','assets/kolkata-hero.png','Spiritual heritage experience.','Dakshineswar, Kolkata','https://www.google.com/maps/dir/?api=1&destination=Dakshineswar+Kali+Temple',1),
+('Kalighat','kalighat','assets/kolkata-hero.png','Historic Kolkata destination.','Kalighat, Kolkata','https://www.google.com/maps/dir/?api=1&destination=Kalighat+Temple+Kolkata',1),
+('St Pauls Cathedral','st-pauls','assets/kolkata-hero.png','Colonial architecture experience.','Cathedral Road, Kolkata','https://www.google.com/maps/dir/?api=1&destination=St+Pauls+Cathedral+Kolkata',1),
+('New Town','new-town','assets/kolkata-hero.png','Modern Kolkata experience.','New Town, Kolkata','https://www.google.com/maps/dir/?api=1&destination=New+Town+Kolkata',1),
+('College Street','college-street','assets/kolkata-hero.png','Books, culture and heritage.','College Street, Kolkata','https://www.google.com/maps/dir/?api=1&destination=College+Street+Kolkata',1);

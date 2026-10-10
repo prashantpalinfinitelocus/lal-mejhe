@@ -1,0 +1,69 @@
+@font-face {
+    font-family: "TCCC";
+    src: url("/assets/fonts/TCCC-UnityText-Regular.ttf") format("truetype");
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "TCCC";
+    src: url("/assets/fonts/TCCC-UnityText-Bold.ttf") format("truetype");
+    font-weight: 700;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "TCCC";
+    src: url("/assets/fonts/TCCC-UnityHeadline-Regular.ttf") format("truetype");
+    font-weight: 500;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "TCCC";
+    src: url("/assets/fonts/TCCC-UnityHeadline-Bold.ttf") format("truetype");
+    font-weight: 800;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "TCCC";
+    src: url("/assets/fonts/TCCC-UnityHeadline-Black.ttf") format("truetype");
+    font-weight: 900;
+    font-style: normal;
+    font-display: swap;
+}
+
+html,
+body,
+body * {
+    font-family: "TCCC", Arial, sans-serif !important;
+}
+
+.user-logout-form {
+    position: absolute;
+    right: 22px;
+    top: 50%;
+    transform: translateY(-50%);
+    margin: 0;
+}
+
+.user-logout-form button {
+    border: 1px solid #fff;
+    background: transparent;
+    color: #fff;
+    border-radius: 999px;
+    padding: 8px 14px;
+    font-family: inherit;
+    font-weight: 800;
+    cursor: pointer;
+}
+
+.user-logout-form button:hover {
+    background: #fff;
+    color: #e41e2b;
+}

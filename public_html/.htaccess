@@ -1,0 +1,54 @@
+Options -Indexes
+
+# Block sensitive files
+<FilesMatch "\.(sql|log|bak|ini)$">
+    Require all denied
+</FilesMatch>
+
+<FilesMatch "^(\.env|config\.php|config\.sample\.php)$">
+    Require all denied
+</FilesMatch>
+
+# Security headers
+<IfModule mod_headers.c>
+
+    # Remove previously supplied security headers
+    Header always unset Content-Security-Policy
+    Header always unset Content-Security-Policy-Report-Only
+    Header always unset X-Powered-By
+
+    # Security headers
+    Header always set X-Content-Type-Options "nosniff"
+    # Limit cross-origin access to same-site resources without enabling COEP,
+    # which could interfere with Google Maps and other third-party embeds.
+    Header always set Cross-Origin-Opener-Policy "same-origin-allow-popups"
+    Header always set Cross-Origin-Resource-Policy "same-site"
+    Header always set Referrer-Policy "strict-origin-when-cross-origin"
+    Header always set X-Frame-Options "SAMEORIGIN"
+    Header always set Permissions-Policy "geolocation=(), microphone=(), camera=()"
+    Header always set Strict-Transport-Security "max-age=31536000"
+
+    # Enforced Content Security Policy
+    Header always set Content-Security-Policy "default-src 'self'; base-uri 'self'; object-src 'none'; frame-ancestors 'self'; form-action 'self' https://wa.me https://api.whatsapp.com; script-src 'self' https://www.googletagmanager.com https://www.google-analytics.com https://www.gstatic.com https://maps.googleapis.com https://maps.gstatic.com https://maxcdn.bootstrapcdn.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://maxcdn.bootstrapcdn.com; font-src 'self' https://fonts.gstatic.com https://maxcdn.bootstrapcdn.com data:; img-src 'self' data: blob:; connect-src 'self' https://www.google-analytics.com https://analytics.google.com https://stats.g.doubleclick.net https://www.googletagmanager.com https://maps.googleapis.com https://maps.gstatic.com; frame-src 'self' https://www.google.com https://maps.google.com; media-src 'self' blob:; worker-src 'self' blob:; manifest-src 'self';"
+
+
+    # V123: public images are consumed same-origin by this website.
+    # Do not advertise wildcard cross-origin access for image assets.
+    <FilesMatch "\\.(?:avif|gif|jpe?g|png|svg|webp|ico)$">
+        Header always unset Access-Control-Allow-Origin
+        Header always unset Access-Control-Allow-Credentials
+    </FilesMatch>
+
+</IfModule>
+
+# Protect diagnostic logs
+RedirectMatch 403 ^/logs(?:/|$)
+
+# Prevent server-side execution inside uploads
+<IfModule mod_rewrite.c>
+
+    RewriteEngine On
+
+    RewriteRule ^uploads/.*\.(?:php|php[0-9]?|phtml|phar)$ - [F,L,NC]
+
+</IfModule>

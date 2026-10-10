@@ -1,0 +1,13 @@
+# secrets and runtime data: never commit
+.env
+*.env
+config.local.php
+public_html/admin/.admin_password
+public_html/admin/setup.enable
+public_html/admin/setup.lock
+public_html/logs/
+public_html/uploads/*
+!public_html/uploads/.gitkeep
+security-report-v1/stackhawk/.hawk/
+.DS_Store
+*.zip

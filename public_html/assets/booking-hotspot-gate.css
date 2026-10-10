@@ -1,0 +1,17 @@
+/* v128: initial booking state requires an explicit hotspot choice. */
+.page-booking-v94 .section4-booking-card[data-location-selected="0"] .section4-location-head,
+.page-booking-v94 .section4-booking-card[data-location-selected="0"] .booking-card-head,
+.page-booking-v94 .section4-booking-card[data-location-selected="0"] #bookingForm { display:none !important; }
+.page-booking-v94 .section4-booking-card[data-location-selected="1"] .hotspot-selection-prompt { display:none !important; }
+.page-booking-v94 .hotspot-selection-prompt {
+ display:flex; align-items:center; justify-content:center; min-height:220px; padding:28px 22px;
+ text-align:center; color:#e41e2b; background:#fff; border:2px dashed #e41e2b; border-radius:14px;
+ font-family:TCCCCondensed,TCCCHeadline,Arial,sans-serif; font-size:clamp(24px,2.5vw,36px); font-weight:700; line-height:1.12;
+}
+.page-booking-v94 .hotspot-pin .hotspot-pin-icon {
+ filter:brightness(0) saturate(100%) invert(78%) sepia(97%) saturate(700%) hue-rotate(1deg) brightness(104%) contrast(104%) !important;
+}
+.page-booking-v94 .hotspot-pin.active .hotspot-pin-icon {
+ filter:brightness(0) saturate(100%) invert(78%) sepia(97%) saturate(700%) hue-rotate(1deg) brightness(115%) contrast(110%) drop-shadow(0 0 5px rgba(255,205,0,.65)) !important;
+}
+@media(max-width:767px){.page-booking-v94 .hotspot-selection-prompt{min-height:170px;padding:22px 16px;font-size:25px}}

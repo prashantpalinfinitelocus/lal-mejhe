@@ -1,0 +1,7 @@
+Options -Indexes
+<FilesMatch "^(setup\.enable|setup\.lock|\.admin_password)$">
+  Require all denied
+</FilesMatch>
+<FilesMatch "^\.">
+  Require all denied
+</FilesMatch>
