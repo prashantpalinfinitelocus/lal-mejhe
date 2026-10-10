@@ -3,14 +3,11 @@ require '../config.php';
 header('Cache-Control: no-store, no-cache, must-revalidate, max-age=0');
 header('Pragma: no-cache');
 if (empty($_SESSION['admin'])) { header('Location:login.php'); exit; }
-if (empty($_SESSION['admin_csrf_token'])) {
-  $_SESSION['admin_csrf_token'] = bin2hex(random_bytes(32));
-}
-$adminCsrfToken = $_SESSION['admin_csrf_token'];
+$adminCsrfToken = csrf_token();
 $pdo->exec("CREATE TABLE IF NOT EXISTS registrations (id INT AUTO_INCREMENT PRIMARY KEY, name VARCHAR(100) NOT NULL, mobile VARCHAR(20) NULL, whatsapp VARCHAR(30) NULL, verified_at DATETIME NULL, created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP, updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4");
 if ($_SERVER['REQUEST_METHOD']==='POST') {
   $postedCsrf = (string)($_POST['csrf_token'] ?? '');
-  if ($postedCsrf === '' || !hash_equals($adminCsrfToken, $postedCsrf)) {
+  if ($postedCsrf === '' || !csrf_valid($postedCsrf)) {
     http_response_code(403);
     exit('Security validation failed. Please refresh the admin page and try again.');
   }

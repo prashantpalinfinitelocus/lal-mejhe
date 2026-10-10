@@ -5,10 +5,9 @@ header('Pragma: no-cache');
 $enableFile=__DIR__.'/setup.enable';
 $lockFile=__DIR__.'/setup.lock';
 if (!is_file($enableFile) || is_file($lockFile) || admin_password_uses_environment()) { http_response_code(404); exit('Setup is disabled.'); }
-if (!isset($_SESSION['admin_setup_csrf'])) $_SESSION['admin_setup_csrf']=bin2hex(random_bytes(32));
-$csrf=$_SESSION['admin_setup_csrf']; $error='';
+$csrf=csrf_token(); $error='';
 if ($_SERVER['REQUEST_METHOD']==='POST') {
-    if (!hash_equals($csrf, (string)($_POST['csrf_token']??''))) $error='Security validation failed. Please refresh and try again.';
+    if (!csrf_valid((string)($_POST['csrf_token']??''))) $error='Security validation failed. Please refresh and try again.';
     else {
         $new=(string)($_POST['new_password']??''); $confirm=(string)($_POST['confirm_password']??'');
         if (strlen($new)<8) $error='Password must be at least 8 characters.';
@@ -18,7 +17,6 @@ if ($_SERVER['REQUEST_METHOD']==='POST') {
                 admin_set_password_hash($new);
                 @file_put_contents($lockFile, date('c')."\n", LOCK_EX);
                 @unlink($enableFile);
-                unset($_SESSION['admin_setup_csrf']);
                 session_regenerate_id(true);
                 $_SESSION['admin']=1;
                 $_SESSION['admin_csrf_token']=bin2hex(random_bytes(32));

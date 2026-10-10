@@ -8,15 +8,12 @@ if (empty($_SESSION['admin'])) {
     header('Location:login.php');
     exit;
 }
-if (empty($_SESSION['sms_test_csrf'])) {
-    $_SESSION['sms_test_csrf'] = bin2hex(random_bytes(32));
-}
-$csrf = $_SESSION['sms_test_csrf'];
+$csrf = csrf_token();
 $result = null;
 $mobile = '';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    if (!hash_equals($csrf, (string)($_POST['csrf_token'] ?? ''))) {
+    if (!csrf_valid((string)($_POST['csrf_token'] ?? ''))) {
         $result = ['ok'=>false,'message'=>'Security validation failed. Refresh and try again.'];
     } elseif (($_POST['action'] ?? 'send') === 'check_delivery') {
         $messageId = trim((string)($_POST['message_id'] ?? ''));
@@ -137,5 +134,5 @@ if (is_file($logPath)) {
 <?php endforeach; endif; ?>
 </div>
 </div>
-<div class="lm-sms-test-6"><form method="post" action="logout.php"><input type="hidden" name="csrf_token" value="<?=e($_SESSION['admin_csrf_token']??'')?>"><button class="lm-sms-test-7">Logout</button></form></div></body>
+<div class="lm-sms-test-6"><form method="post" action="logout.php"><input type="hidden" name="csrf_token" value="<?=e(csrf_token())?>"><button class="lm-sms-test-7">Logout</button></form></div></body>
 </html>

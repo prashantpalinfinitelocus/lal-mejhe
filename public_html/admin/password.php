@@ -3,10 +3,9 @@ require '../config.php';
 header('Cache-Control: no-store, no-cache, must-revalidate, max-age=0');
 header('Pragma: no-cache');
 if (empty($_SESSION['admin'])) { header('Location:login.php'); exit; }
-if (empty($_SESSION['admin_csrf_token'])) $_SESSION['admin_csrf_token'] = bin2hex(random_bytes(32));
-$csrf=$_SESSION['admin_csrf_token']; $msg=''; $error='';
+$csrf=csrf_token(); $msg=''; $error='';
 if ($_SERVER['REQUEST_METHOD']==='POST') {
-    if (!hash_equals($csrf, (string)($_POST['csrf_token']??''))) $error='Security validation failed. Please refresh and try again.';
+    if (!csrf_valid((string)($_POST['csrf_token']??''))) $error='Security validation failed. Please refresh and try again.';
     elseif (admin_password_uses_environment()) $error='The admin password is controlled by the ADMIN_PASSWORD_HASH server environment variable. Change it in Hostinger instead.';
     else {
         $current=(string)($_POST['current_password']??''); $new=(string)($_POST['new_password']??''); $confirm=(string)($_POST['confirm_password']??'');
@@ -18,8 +17,7 @@ if ($_SERVER['REQUEST_METHOD']==='POST') {
             try {
                 admin_set_password_hash($new);
                 session_regenerate_id(true);
-                $_SESSION['admin']=1; $_SESSION['admin_csrf_token']=bin2hex(random_bytes(32));
-                $csrf=$_SESSION['admin_csrf_token']; $msg='Admin password changed successfully.';
+                $_SESSION['admin']=1; $csrf=csrf_token(); $msg='Admin password changed successfully.';
             } catch (Throwable $e) { error_log('Admin password change error: '.$e->getMessage()); $error='Unable to save the new password. Make sure the admin folder is writable by PHP.'; }
         }
     }

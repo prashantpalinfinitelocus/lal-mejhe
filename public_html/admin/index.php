@@ -5,10 +5,7 @@ header('Pragma: no-cache');
 if (empty($_SESSION['admin'])) { header('Location:login.php'); exit; }
 
 // Admin CSRF protection: one unpredictable token per authenticated session.
-if (empty($_SESSION['admin_csrf_token'])) {
-    $_SESSION['admin_csrf_token'] = bin2hex(random_bytes(32));
-}
-$adminCsrfToken = $_SESSION['admin_csrf_token'];
+$adminCsrfToken = csrf_token();
 
 $msg=''; $error='';
 
@@ -49,7 +46,7 @@ function admin_upload_location_image($field, $old='') {
 try {
 if ($_SERVER['REQUEST_METHOD']==='POST') {
     $postedCsrf = (string)($_POST['csrf_token'] ?? '');
-    if ($postedCsrf === '' || !hash_equals($adminCsrfToken, $postedCsrf)) {
+    if ($postedCsrf === '' || !csrf_valid($postedCsrf)) {
         throw new RuntimeException('Security validation failed. Please refresh the admin page and try again.');
     }
     $action=$_POST['action']??'';

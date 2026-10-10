@@ -1,10 +1,9 @@
 <?php
 require_once __DIR__ . '/../config.php';
 if (!empty($_SESSION['admin'])) { header('Location:index.php'); exit; }
-if (!isset($_SESSION['admin_login_csrf'])) $_SESSION['admin_login_csrf'] = bin2hex(random_bytes(32));
 $error='';
 if ($_SERVER['REQUEST_METHOD']==='POST') {
-    if (!hash_equals((string)$_SESSION['admin_login_csrf'], (string)($_POST['csrf_token']??''))) {
+    if (!csrf_valid((string)($_POST['csrf_token']??''))) {
         $error='Security validation failed. Please refresh and try again.';
     } else {
         $ip=substr((string)($_SERVER['REMOTE_ADDR']??''),0,45);
@@ -20,7 +19,6 @@ if ($_SERVER['REQUEST_METHOD']==='POST') {
                     session_regenerate_id(true);
                     $_SESSION['admin']=1;
                     $_SESSION['admin_csrf_token']=bin2hex(random_bytes(32));
-                    unset($_SESSION['admin_login_csrf']);
                     header('Location:index.php'); exit;
                 }
                 $attempts=(int)($row['failed_attempts']??0)+1;
@@ -33,4 +31,4 @@ if ($_SERVER['REQUEST_METHOD']==='POST') {
     }
 }
 ?>
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,nofollow"><title>Admin Login | Laal Mejhe Adda</title><link rel="stylesheet" href="../assets/style-modern-v3.css?v=4.0.0"></head><body><section class="admin-login"><form method="post" autocomplete="off"><span class="eyebrow">LAAL MEJHE ADDA</span><h2>Admin Login</h2><p>Manage locations, seats, slots, bookings and registrations.</p><?php if($error):?><div class="login-error"><?=e($error)?></div><?php endif;?><input type="hidden" name="csrf_token" value="<?=e($_SESSION['admin_login_csrf'])?>"><input type="password" name="password" placeholder="Admin Password" required autocomplete="current-password"><button class="btn" type="submit">LOGIN →</button><small>Admin access is protected by password hashing, CSRF validation and login throttling.</small></form></section><link rel="stylesheet" href="../assets/admin-login.css?v=1"></body></html>
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,nofollow"><title>Admin Login | Laal Mejhe Adda</title><link rel="stylesheet" href="../assets/style-modern-v3.css?v=4.0.0"></head><body><section class="admin-login"><form method="post" autocomplete="off"><span class="eyebrow">LAAL MEJHE ADDA</span><h2>Admin Login</h2><p>Manage locations, seats, slots, bookings and registrations.</p><?php if($error):?><div class="login-error"><?=e($error)?></div><?php endif;?><input type="hidden" name="csrf_token" value="<?=e(csrf_token())?>"><input type="password" name="password" placeholder="Admin Password" required autocomplete="current-password"><button class="btn" type="submit">LOGIN →</button><small>Admin access is protected by password hashing, CSRF validation and login throttling.</small></form></section><link rel="stylesheet" href="../assets/admin-login.css?v=1"></body></html>
